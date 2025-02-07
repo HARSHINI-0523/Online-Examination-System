@@ -1,0 +1,22 @@
+footer {
+    background-color: rgb(234, 248, 253);
+    color: rgb(25, 25, 78);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  footer .contact-details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  footer .contact-details div {
+    flex: 1;
+    margin: 10px;
+  }
+  
+  footer .contact-details div p {
+    margin: 5px 0;
+  }
+  

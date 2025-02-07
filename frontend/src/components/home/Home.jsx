@@ -3,7 +3,7 @@ import { CgMail } from "react-icons/cg";
 import { FaLinkedin } from "react-icons/fa";
 import Lottie from "react-lottie";
 import onlinetest from "../../assets/Animations/onlinetest.json";
-import ProctoringAnimation from "../../assets/Animations/ProctoringAnimation.json";
+
 function Home() {
 
     const defaultOptionsOT = {
@@ -15,48 +15,8 @@ function Home() {
         }
     };
 
-    const defaultOptionsPA = {
-        loop: true,
-        autoplay: true,
-        animationData: ProctoringAnimation,
-        rendererSettings: {
-            preserveAspectRatio: "xMidYMid slice"
-        }
-    };
-
-
-
     return (
         <div>
-            <div className="home-header flex">
-                <div className="website-name"><a href="/" style={{ color: "black" }}>OES</a></div>
-                <div className="header-option">
-                    Features <span className="header-arrow">&#9662;</span>
-                </div>
-                <div className="header-option">
-                    About us <span className="header-arrow">&#9662;</span>
-                </div>
-                <div className="header-option dropdown">
-                    <div className="dropdown-toggle" data-bs-toggle="dropdown">
-                        Contact us
-                    </div>
-                    <ul className="dropdown-menu">
-                        <li><a className="dropdown-item" href="#">gmail<CgMail style={{ marginLeft: "2px" }} /></a></li>
-                        <li><a className="dropdown-item" href="https://www.linkedin.com/in/anjusri-kandi">linkedIn<FaLinkedin style={{ marginLeft: "2px" }} /></a></li>
-                    </ul>
-                </div>
-
-
-                <div className="header-option">
-                    Login
-                </div>
-
-                <div className="header-option">
-                    <button className="btn btn-primary ">Take Demo Test</button>
-                </div>
-
-            </div>
-
             <div className="home-body">
                 <div className="about">A Secure, Reliable, Efficient, and User-Friendly Online <span className="span-ele">Examination</span> System
 
@@ -132,3 +92,4 @@ function Home() {
 }
 
 export default Home;
+
