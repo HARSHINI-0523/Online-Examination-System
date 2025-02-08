@@ -1,0 +1,89 @@
+.sl-container{
+    display: flex;
+}
+
+.sl-form-container{
+    width:100%;
+    max-width: 500px;;
+    margin:10px;
+    margin-right:50px;
+}
+.sl-tabs {
+    display: flex;
+    justify-content: center; /* Centers buttons horizontally */
+    gap: 10px; /* Adds space between buttons */
+    margin: 0 auto; /* Centers within parent */
+}
+.sl-tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: rgb(234, 248, 253);
+    font-size: 1.2em;
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    max-width:100px;
+}
+
+.sl-tab-btn:hover {
+    background: #d0f0ff;
+}
+
+.active {
+    font-weight: 600;
+    color: #007bff;
+}
+
+.sl-body {
+    padding: 20px;
+    border: 3px 4px solid black;
+}
+
+.signup-container, .login-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.form-item label {
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.form-item input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.form-req{
+    color:red;
+}
+.submit-btn {
+    width: 100%;
+    max-width:100px;
+    
+    padding: 10px;
+    font-size: 1em;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
+
