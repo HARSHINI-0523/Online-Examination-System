@@ -1,10 +1,14 @@
 import "./Login.css";
 import Lottie from "react-lottie";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import API from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 import LoginAnimation from "../../assets/Animations/LoginAnimation.json";
+import { userLoginContext } from "../../contexts/userLoginContext";
 function Login() {
+  let navigate = useNavigate();
+  const { LoginUser, err } = useContext(userLoginContext);
   const [activeTab, setActiveTab] = useState("signup");
   const [formData, setFormData] = useState({
     email: "",
@@ -45,7 +49,7 @@ function Login() {
       try {
         let response = await API.post("/user/signup", formData);
         console.log(formData);
-        navigate("/login");
+        navigate("/dashboard/update-profile");
       } catch (error) {
         if (error.response) {
           if (error.response.status === 409) {
@@ -63,24 +67,8 @@ function Login() {
   //Handle Login submit button
   async function handleSubmitLogin(e) {
     e.preventDefault();
-    //API call to login
-    try {
-      let response = await API.post("/user/login", formData);
-      console.log(formData);
-      navigate("/home");
-    } catch (error) {
-      if (error.response) {
-        if (error.response.status === 401) {
-          setLoginError(error.response.data.message);
-        } 
-        else {
-          setLoginError("Something went wrong. Please try again later.");
-        }
-      } 
-      else {
-        setLoginError("Something went wrong. Please try again later.");
-      }
-    }
+    await LoginUser(formData);
+    if (!err) navigate("/dashboard");
   }
 
   return (

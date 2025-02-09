@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+const cookieParser=require('cookie-parser');
 
 const app = express(); //express application object
 dotenv.config(); //loads environment variables from a .env file into process.env
@@ -12,8 +13,12 @@ dotenv.config(); //loads environment variables from a .env file into process.env
 const userRoutes = require("./routes/userRoutes");
 
 //Middlewares
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",// Frontend URL
+  credentials: true, // Allow sending cookies
+}));
 app.use(express.json());
+app.use(cookieParser());
 
 //Routes
 app.use("/api/user", userRoutes);

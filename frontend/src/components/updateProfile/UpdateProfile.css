@@ -1,0 +1,74 @@
+.update-profile{
+    
+    margin:50px;
+    padding:30px;
+    border-radius:10px;
+    /* background-color: rgb(230, 245, 252); */
+    /*box-shadow: 2px 3px rgb(205, 241, 245);*/
+}
+.up-body{
+    display: flex;
+    
+    
+}
+.up-card{
+    width:50%;
+    margin-right:50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.typing-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #da1818;
+    white-space: nowrap;
+    text-align:justify;
+    overflow: hidden;
+    border-right: 2px solid black;
+    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: black; }
+  }
+
+h1{
+    color:rgb(8, 8, 57);
+    text-align:center;
+    margin:20px;
+}
+
+.up-form-item{
+    margin:10px;
+    
+}
+
+.up-form-item label{
+    display: block;
+    margin-bottom:10px;
+    font-weight: 500;
+    font-size:1.2em;
+}
+
+.up-form-item input, .up-form-item textarea , .up-form-item select{
+    width:100%;
+    margin-bottom:10px;
+    height:100%;
+    max-height:30px;
+    padding:2px;
+}
+
+.update-btn{
+    margin:10px;
+    border:none;
+    padding:10px;
+    background-color:rgb(18, 172, 18);
+    color:white;
+}
