@@ -19,18 +19,7 @@ function UpdateProfile() {
     <div className="update-profile">
       <h1>Update Profile</h1>
       <div className="up-body">
-        <div className="up-card">
-          <p className="typing-text">
-            Take a moment to refine your profile,
-            <br />
-            A touch of detail, a hint of style.
-            <br />
-            Let your presence shine with grace,
-            <br />
-            Complete your journey—set the pace.
-          </p>
-          <Lottie options={defaultOptions} height={400} />
-        </div>
+
         <div className="profile-photo"></div>
         <form>
           <div className="up-form-item">

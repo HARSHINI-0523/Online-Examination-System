@@ -2,14 +2,58 @@
     display: flex;
     background-color: rgb(234, 248, 253);;
 }
-.about{
 
+.about{
+    
+    /* display: grid;
+    place-items: center; */
     margin:50px;
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 700;
-    color: rgb(25, 25, 78);
+    color: rgb(16, 16, 91);
+    height:490px;
 
 }
+
+.auto-typed{
+    display:inline-block;
+    
+}
+/* .typing-text {
+    /* font-size: 1.5rem;
+    font-weight: bold;
+    color: #114e61; */
+    /* margin-left:3px;
+    margin-bottom:10px;
+    font-size: 1.7rem; 
+    white-space: nowrap;
+    display: block;
+    text-align:justify;
+    overflow: hidden;
+    border-right: 2px solid black;
+    width: 0;
+    animation: typing 4s steps(48, end) forwards , blink-caret 0.75s step-end infinite; 
+  }
+
+  
+@keyframes typing {
+ from { width: 0; }
+ to { width: 100%; }
+}
+  
+@keyframes blink-caret {
+    0%{
+        border-color:rgb(234, 248, 253) ;
+    }
+    50%{
+        border-color:black;
+    }
+    100%{
+        border-color: rgb(234, 248, 253);
+    }
+ /* from, to { border-color: transparent; }
+ 50% { border-color: black; }
+} */
 
 .span-ele{
     color:rgb(53, 53, 190);
@@ -37,15 +81,53 @@
 }
 
 .feature-pts .pt {
-    border-left: 2px solid #6d42c4; /* Vertical line */
-    padding-left: 15px; /* Space between line and text */
+    background-color: rgb(234, 248, 253);
+    width: 370px;
+    height: 270px;
+    border-radius: 15px;
+    justify-items: center;
+    align-content: center;
+    color: rgb(26, 26, 97);
+    animation:slideLR 5s  alternate;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slideLR {
+    0%{
+        transform: translateX(-40px);
+    }
+    100%{
+        transform: translateX(50px);
+    }
+    
+}
+
+h6{
+    font-size: 1.2rem;
+    margin-top:15px;
 }
 
 .feature-pts .pt1 {
-    border-right: 2px solid #6d42c4; /* Vertical line */
-    padding-right: 15px; /* Space between line and text */
-}
+    background-color:rgb(234, 248, 253) ;
+    width:370px;
+    height:270px;
+    justify-items: center;
+    align-content: center;
+    border-radius: 15px;
+    color:rgb(26, 26, 97);
+    animation:slideRL 5s  alternate;
+    animation-fill-mode: forwards;
+} 
 
+@keyframes slideRL {
+    0%{
+        transform: translateX(50px);
+    }
+    100%{
+        transform: translateX(-40px);
+    }
+    
+}
 .pt li,.pt1 li{
     font-size:1.1rem;
 }
@@ -60,4 +142,3 @@
     width:310px;
     height:310px;
 }
-
