@@ -15,7 +15,7 @@ function Header(){
                 </div>
                 
                 <div className="header-option">
-                        Feedback
+                      <Link to="/feedback">Feedback</Link>  
                 </div>
 
                 <div className="header-option">

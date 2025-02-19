@@ -161,10 +161,24 @@ function Home() {
           <div className="feature-img">
             <img
               src="https://www.thinkexam.com/images_newtheme/remoteproctoring/securebrowser.png"
-              alt=""
+              alt="Secure Browser"
             />
           </div>
         </div>
+
+      </div>
+
+      <div className="user-types">
+        <div className="utype">
+         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, dolores laudantium? Iste ea possimus explicabo et ut sint alias dolore ex, obcaecati dicta, itaque nulla ad ullam, rerum velit accusamus necessitatibus corporis pariatur incidunt. Laboriosam.</p>
+        </div>
+        <div className="utype">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, dolores laudantium? Iste ea possimus explicabo et ut sint alias dolore ex, obcaecati dicta, itaque nulla ad ullam, rerum velit accusamus necessitatibus corporis pariatur incidunt. Laboriosam.</p>
+        </div>
+        <div className="utype">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, dolores laudantium? Iste ea possimus explicabo et ut sint alias dolore ex, obcaecati dicta, itaque nulla ad ullam, rerum velit accusamus necessitatibus corporis pariatur incidunt. Laboriosam.</p>
+        </div>
+
       </div>
     </div>
   );

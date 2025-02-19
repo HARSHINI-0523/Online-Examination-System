@@ -1,51 +1,45 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./RootLayout";
 import Home from "./components/home/Home";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
-
+import Feedback from "./components/feedback/Feedback";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import UpdateProfile from "./components/updateProfile/UpdateProfile";
 
-const PublicLayout = () => (
-  <>
-    <Header />
-    <Outlet />
-    <Footer />
-  </>
-);
 
-const PrivateLayout = () => (
-  <PrivateRoute>
-    <Outlet />
-  </PrivateRoute>
-  );
 
 function App() {
+  const browserRouter = createBrowserRouter([
+    {
+      path: "",
+      element: <RootLayout />,
+      children: [
+        {
+          path: "",
+          element: <Home />,
+        },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "feedback",
+          element: <Feedback />,
+        }
+      ],
+    },
+  ]);
   return (
-    <Router>
-      <Routes>
-        <Route element={<PublicLayout />}>
-          <Route path="/" element={<Home />} />
-          
-          <Route path="/login" element={<Login />} />
-        </Route>
-
-        <Route path="/dashboard" element={<PrivateLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="update-profile" element={<UpdateProfile />} />
-        </Route>
-      </Routes>
-    </Router>
+    <div className="main">
+      <RouterProvider router={browserRouter} />
+    </div>
   );
+
 }
 
 export default App;
