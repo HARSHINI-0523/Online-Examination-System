@@ -6,6 +6,7 @@ import onlinetest from "../../assets/Animations/onlinetest.json";
 import { IoCheckbox } from "react-icons/io5";
 import Typed from 'typed.js';
 import {useEffect,useRef} from 'react';
+import { AnimatedOnScroll } from "react-animated-css-onscroll";
 
 function Home() {
   const el = useRef(null);
@@ -48,25 +49,7 @@ function Home() {
       };
     }
 
-    //Sliding effect
-    const elements = document.querySelectorAll(".feature-pts .pt");
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("animate");
-                    } else {
-                        entry.target.classList.remove("animate"); // Remove if you want re-trigger on scroll
-                    }
-                });
-            },
-            { threshold: 0.3 } // Trigger when 30% of the element is visible
-        );
-
-        elements.forEach((el) => observer.observe(el));
-
-        return () => observer.disconnect();
+    
   }, []);
   
   return (
@@ -87,6 +70,7 @@ function Home() {
         </div>
 
         <div className="feature-pts">
+        <AnimatedOnScroll  animationIn="fadeInLeft" animateOnce={true}>
           <div className="pt">
             <h3>Proctored Test</h3>
             
@@ -108,6 +92,7 @@ function Home() {
               </li>
             </ul>
           </div>
+          </AnimatedOnScroll>
           <div className="feature-img">
             <img
               src="https://www.testinvite.com/tif/gb/images/hero/proctored-exam-with-webcam-and-screen-recording-lockdown-browser.webp"
@@ -122,6 +107,7 @@ function Home() {
               alt="Performance Analytics image"
             />
           </div>
+          <AnimatedOnScroll  animationIn="fadeInRight" >
           <div className="pt1">
             <h3>Test Analytics</h3>
             <ul>
@@ -137,9 +123,11 @@ function Home() {
              
             </ul>
           </div>
+          </AnimatedOnScroll>
         </div>
 
         <div className="feature-pts">
+        <AnimatedOnScroll  animationIn="fadeInLeft">
           <div className="pt">
             <h3>Secure Browser</h3>
            
@@ -158,28 +146,20 @@ function Home() {
               </li>
             </ul>
           </div>
+          </AnimatedOnScroll>
           <div className="feature-img">
             <img
               src="https://www.thinkexam.com/images_newtheme/remoteproctoring/securebrowser.png"
               alt="Secure Browser"
             />
           </div>
+         
         </div>
+        
 
       </div>
-
-      <div className="user-types">
-        <div className="utype">
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, dolores laudantium? Iste ea possimus explicabo et ut sint alias dolore ex, obcaecati dicta, itaque nulla ad ullam, rerum velit accusamus necessitatibus corporis pariatur incidunt. Laboriosam.</p>
-        </div>
-        <div className="utype">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, dolores laudantium? Iste ea possimus explicabo et ut sint alias dolore ex, obcaecati dicta, itaque nulla ad ullam, rerum velit accusamus necessitatibus corporis pariatur incidunt. Laboriosam.</p>
-        </div>
-        <div className="utype">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit, dolores laudantium? Iste ea possimus explicabo et ut sint alias dolore ex, obcaecati dicta, itaque nulla ad ullam, rerum velit accusamus necessitatibus corporis pariatur incidunt. Laboriosam.</p>
-        </div>
-
-      </div>
+      
+      
     </div>
   );
 }
