@@ -20,15 +20,6 @@ function Home() {
     },
   };
 
-  // useEffect(()=>{
-  //   const typed=new Typed(".auto-typed",{
-  //     strings: ["Secure","Reliable","Efficient","User Friendly"],
-  //     typeSpeed:50,
-  //     backSpeed:50,
-  //     loop:true,
-      
-  //   });
-  // }
   useEffect(() => {
     //Typing effect
     if (el.current) {
@@ -101,14 +92,14 @@ function Home() {
           </div>
         </div>
         <div className="feature-pts">
-          <div className="feature-img1">
+          <div className="feature-img">
             <img
               src="https://www.alloysoftware.com/wp-content/uploads/2020/06/performance-analytics-personalized.svg"
               alt="Performance Analytics image"
             />
           </div>
           <AnimatedOnScroll  animationIn="fadeInRight" >
-          <div className="pt1">
+          <div className="pt">
             <h3>Test Analytics</h3>
             <ul>
               <li>

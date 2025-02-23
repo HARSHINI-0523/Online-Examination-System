@@ -38,8 +38,7 @@
     perspective: 1000px;
 }
 
-.feature-pts .pt,
-.feature-pts .pt1 {
+.feature-pts .pt {
     background-color: rgb(234, 248, 253);
     width: 370px;
     height: 270px;
@@ -52,21 +51,18 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.feature-pts .pt:hover,
-.feature-pts .pt1:hover {
+.feature-pts .pt:hover {
     transform: rotateY(20deg) rotateX(10deg) scale(1.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
-.feature-img img,
-.feature-img1 img {
+.feature-img img {
     width: 300px;
     height: 300px;
     transform: rotateY(0deg) rotateX(0deg);
     transition: transform 0.6s ease;
 }
 
-.feature-img img:hover,
-.feature-img1 img:hover {
+.feature-img img:hover {
     transform: rotateY(15deg) rotateX(10deg) scale(1.1);
 }
