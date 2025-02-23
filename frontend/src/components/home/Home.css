@@ -4,8 +4,11 @@
 }
 
 .about {
-    margin: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top:50px;
     font-size: 5rem;
+    text-align:center;
     font-weight: 700;
     color: rgb(16, 16, 91);
     height: 490px;
@@ -65,4 +68,49 @@
 
 .feature-img img:hover {
     transform: rotateY(15deg) rotateX(10deg) scale(1.1);
+}
+
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .about{
+        font-size: 3rem;
+        
+    }
+    .about-animation Lottie{
+        
+        width:200px;
+        height:150px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .about{
+        font-size: 4.3rem;
+    }
+    .about-animation Lottie{
+        
+        width:500px;
+        height:450px;
+    }
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
 }
