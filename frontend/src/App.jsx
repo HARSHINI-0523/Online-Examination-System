@@ -10,6 +10,8 @@ import Feedback from "./components/feedback/Feedback";
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import UpdateProfile from "./components/updateProfile/UpdateProfile";
+import UserLoginStore from "./contexts/UserLoginStore";
+import Features from "./components/features/Features";
 
 
 
@@ -30,7 +32,12 @@ function App() {
         {
           path: "feedback",
           element: <Feedback />,
+        },
+        {
+          path: "features",
+          element: <Features />,
         }
+
       ],
     },
   ]);
