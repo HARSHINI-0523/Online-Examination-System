@@ -10,6 +10,7 @@ import Home from "./components/home/Home";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
+import AboutUs from "./components/aboutus/AboutUs";
 
 import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -35,7 +36,7 @@ function App() {
       <Routes>
         <Route element={<PublicLayout />}>
           <Route path="/" element={<Home />} />
-          
+          <Route path="/AboutUs" element={<AboutUs/>}/>
           <Route path="/login" element={<Login />} />
         </Route>
 
