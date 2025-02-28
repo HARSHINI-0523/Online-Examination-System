@@ -11,7 +11,7 @@ function Header(){
                 </div>
                 
                 <div className="header-option">
-                    About us 
+                   <Link to="/AboutUs">About us </Link> 
                 </div>
                 
                 <div className="header-option">

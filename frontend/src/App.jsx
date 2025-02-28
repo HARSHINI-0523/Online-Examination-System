@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import Home from "./components/home/Home";
 import Header from "./components/header/Header";
+import AboutUs from "./components/aboutus/AboutUs"; 
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Feedback from "./components/feedback/Feedback";
@@ -12,8 +13,6 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UpdateProfile from "./components/updateProfile/UpdateProfile";
 import UserLoginStore from "./contexts/UserLoginStore";
 import Features from "./components/features/Features";
-
-
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -26,6 +25,10 @@ function App() {
           element: <Home />,
         },
         {
+          path: "aboutus", 
+          element: <AboutUs />,
+        },
+        {
           path: "login",
           element: <Login />,
         },
@@ -36,17 +39,16 @@ function App() {
         {
           path: "features",
           element: <Features />,
-        }
-
+        },
       ],
     },
   ]);
+
   return (
     <div className="main">
       <RouterProvider router={browserRouter} />
     </div>
   );
-
 }
 
 export default App;
