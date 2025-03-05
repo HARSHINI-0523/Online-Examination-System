@@ -13,8 +13,6 @@ import UpdateProfile from "./components/updateProfile/UpdateProfile";
 import UserLoginStore from "./contexts/UserLoginStore";
 import Features from "./components/features/Features";
 
-
-
 function App() {
   const browserRouter = createBrowserRouter([
     {
