@@ -7,7 +7,7 @@ function Header(){
                 <div className="website-name"><a href="/" style={{ color: "black" }}>OES</a></div>
                 
                 <div className="header-option">
-                    Features 
+                <Link to="/features">Features</Link>  
                 </div>
                 
                 <div className="header-option">
