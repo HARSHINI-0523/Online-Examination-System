@@ -49,6 +49,7 @@ function Login() {
       try {
         let response = await API.post("/user/signup", formData);
         console.log(formData);
+        LoginUser(formData);
         navigate("/dashboard/update-profile");
       } catch (error) {
         if (error.response) {

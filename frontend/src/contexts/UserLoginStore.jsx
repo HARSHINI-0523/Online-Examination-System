@@ -13,6 +13,7 @@ function UserLoginStore({ children }){
         try{
             let res=await API.post("/user/login",userCred,{ withCredentials: true });
             if(res.status===200){
+                
                 checkSession(); // Verify session after login
                 setError("");
             }

@@ -12,6 +12,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UpdateProfile from "./components/updateProfile/UpdateProfile";
 import UserLoginStore from "./contexts/UserLoginStore";
 import Features from "./components/features/Features";
+import Profile from "./components/profile/Profile"
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -34,8 +35,17 @@ function App() {
         {
           path: "features",
           element: <Features />,
-        }
-
+        },
+        {
+          path: "/user-profile",
+          element: <Profile />,
+          children: [
+            {
+              path: "/user-profile",
+              element:<Profile/>
+            },
+          ],
+        },
       ],
     },
   ]);
@@ -44,7 +54,6 @@ function App() {
       <RouterProvider router={browserRouter} />
     </div>
   );
-
 }
 
 export default App;

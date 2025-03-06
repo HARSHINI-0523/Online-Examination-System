@@ -1,6 +1,13 @@
 import "./Header.css"
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {userLoginContext} from "../../contexts/userLoginContext";
+import { useContext } from "react";
+
 function Header(){
+
+    const { userLoginStatus , err } = useContext(userLoginContext);
+
     return(
         <div>
             <div className="home-header flex">
@@ -19,7 +26,8 @@ function Header(){
                 </div>
 
                 <div className="header-option">
-                    <Link to="/login">Login</Link>
+                    {userLoginStatus?(<Link to="/user-profile">Profile</Link>):(<Link to="/login">Login</Link>)}
+                    
                 </div>
 
                 <div className="header-option">
