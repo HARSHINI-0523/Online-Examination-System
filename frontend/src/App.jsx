@@ -40,6 +40,10 @@ function App() {
           path: "features",
           element: <Features />,
         },
+        {
+          path: "dashboard/update-profile",
+          element: <UpdateProfile />, 
+        },
       ],
     },
   ]);

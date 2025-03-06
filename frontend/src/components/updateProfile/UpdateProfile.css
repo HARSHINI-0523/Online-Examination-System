@@ -1,58 +1,165 @@
-.update-profile{
-    
-    margin:50px;
-    padding:30px;
-    border-radius:10px;
-    /* background-color: rgb(230, 245, 252); */
-    /*box-shadow: 2px 3px rgb(205, 241, 245);*/
+.update-profile {
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background-color: #f4f7f9;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
 }
-.up-body{
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.up-body {
     display: flex;
-    
-    
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
 }
-.up-card{
-    width:50%;
-    display:flex;
-    margin-right:50px;
-    justify-content: center;
+
+/* Left side - Profile Photo and Upload Button */
+.left-section {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    font-size:5em;
-
+    justify-content: center;
+    width: 200px;
+    text-align: center;
 }
 
-
-
-h1{
-    color:rgb(8, 8, 57);
-    text-align:center;
-    margin:20px;
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: #bdc3c7;
+    overflow: hidden;
+    margin-top: -700px;
+    border: 4px solid #2980b9;
 }
 
-.up-form-item{
-    margin:10px;
-    
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.up-form-item label{
+.upload-btn {
+    padding: 10px 20px;
+    background-color: #2980b9;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.upload-btn:hover {
+    background-color: #1d6f8f;
+}
+
+.upload-btn:focus {
+    outline: none;
+}
+
+/* Right side - Form */
+.right-section {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.up-form-item {
+    margin: 20px 0;
+    width: 100%;
+}
+
+.up-form-item label {
     display: block;
-    margin-bottom:10px;
-    font-weight: 500;
-    font-size:1.2em;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: #34495e;
 }
 
-.up-form-item input, .up-form-item textarea , .up-form-item select{
-    width:100%;
-    margin-bottom:10px;
-    height:100%;
-    max-height:30px;
-    padding:2px;
+.up-form-item input,
+.up-form-item textarea,
+.up-form-item select {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #34495e;
+    background-color: #fff;
+    transition: border 0.3s ease;
 }
 
-.update-btn{
-    margin:10px;
-    border:none;
-    padding:10px;
-    background-color:rgb(18, 172, 18);
-    color:white;
+.up-form-item input:focus,
+.up-form-item textarea:focus,
+.up-form-item select:focus {
+    border-color: #2980b9;
+    outline: none;
+}
+
+.up-form-item input[type="text"],
+.up-form-item input[type="email"],
+.up-form-item input[type="tel"] {
+    height: 40px;
+}
+
+.up-form-item textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+.update-btn {
+    margin: 20px 0;
+    padding: 12px 30px;
+    background-color: #2980b9;
+    color: white;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.update-btn:hover {
+    background-color: #1d6f8f;
+}
+
+.update-btn:focus {
+    outline: none;
+}
+
+.text-secondary {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .up-body {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .left-section {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .right-section {
+        width: 100%;
+        max-width: 100%;
+    }
 }
