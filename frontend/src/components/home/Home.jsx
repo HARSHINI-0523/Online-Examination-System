@@ -6,8 +6,17 @@ import onlinetest from "../../assets/Animations/onlinetest.json";
 import { IoCheckbox } from "react-icons/io5";
 import Typed from "typed.js";
 import { useEffect, useRef } from "react";
-import { AnimatedOnScroll } from "react-animated-css-onscroll";
+import { motion } from "framer-motion";
 
+const fadeInLeft = {
+  hidden: { opacity: 0, x: 60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1 } },
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: -60 },
+  visible: { opacity: 1, x: 0, transition: { duration: 1 } },
+};
 function Home() {
   const el = useRef(null);
 
@@ -44,7 +53,7 @@ function Home() {
           Online <span className="span-ele">Examination</span> System
         </div>
         <div className="about-animation">
-          <Lottie  options={defaultOptionsOT} height={550} width={500} />
+          <Lottie options={defaultOptionsOT} height={550} width={500} />
         </div>
       </div>
 
@@ -54,7 +63,13 @@ function Home() {
         </div>
 
         <div className="feature-pts">
-          <AnimatedOnScroll animationIn="fadeInLeft" animateOnce={false}>
+          <motion.header
+            className="header"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInRight}
+          >
             <div className="pt">
               <h3>Proctored Test</h3>
 
@@ -73,7 +88,7 @@ function Home() {
                 </li>
               </ul>
             </div>
-          </AnimatedOnScroll>
+          </motion.header>
           <div className="feature-img">
             <img
               src="https://www.testinvite.com/tif/gb/images/hero/proctored-exam-with-webcam-and-screen-recording-lockdown-browser.webp"
@@ -88,7 +103,13 @@ function Home() {
               alt="Performance Analytics image"
             />
           </div>
-          <AnimatedOnScroll animationIn="fadeInRight">
+          <motion.header
+            className="header"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInLeft}
+          >
             <div className="pt">
               <h3>Test Analytics</h3>
               <ul>
@@ -103,11 +124,17 @@ function Home() {
                 </li>
               </ul>
             </div>
-          </AnimatedOnScroll>
+          </motion.header>
         </div>
 
         <div className="feature-pts">
-          <AnimatedOnScroll animationIn="fadeInLeft">
+          <motion.header
+            className="header"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInRight}
+          >
             <div className="pt">
               <h3>Secure Browser</h3>
 
@@ -126,7 +153,7 @@ function Home() {
                 </li>
               </ul>
             </div>
-          </AnimatedOnScroll>
+          </motion.header>
           <div className="feature-img">
             <img
               src="https://www.thinkexam.com/images_newtheme/remoteproctoring/securebrowser.png"
