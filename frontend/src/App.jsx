@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import Home from "./components/home/Home";
 import Header from "./components/header/Header";
+import AboutUs from "./components/aboutus/AboutUs"; 
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Feedback from "./components/feedback/Feedback";
@@ -25,6 +26,10 @@ function App() {
           element: <Home />,
         },
         {
+          path: "aboutus", 
+          element: <AboutUs />,
+        },
+        {
           path: "login",
           element: <Login />,
         },
@@ -36,6 +41,11 @@ function App() {
           path: "features",
           element: <Features />,
         },
+        
+        {
+          path: "update-profile",
+          element: <UpdateProfile />,
+        },
         {
           path: "/user-profile",
           element: <Profile />,
@@ -46,9 +56,12 @@ function App() {
             },
           ],
         },
+      
+        
       ],
     },
   ]);
+
   return (
     <div className="main">
       <RouterProvider router={browserRouter} />

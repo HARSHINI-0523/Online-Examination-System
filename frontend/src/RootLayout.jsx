@@ -12,8 +12,7 @@ function RootLayout() {
     <div>
       <Header />
       <Outlet />
-      {userLoginStatus == true ? <Dashboard /> : <Dashboard />}
-      {/* {userLoginStatus && <Dashboard />} */}
+      {userLoginStatus && <Dashboard />}
       <Footer />
     </div>
   );

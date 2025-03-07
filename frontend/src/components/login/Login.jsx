@@ -50,7 +50,7 @@ function Login() {
         let response = await API.post("/user/signup", formData);
         console.log(formData);
         LoginUser(formData);
-        navigate("/dashboard/update-profile");
+        navigate("/update-profile");
       } catch (error) {
         if (error.response) {
           if (error.response.status === 409) {
@@ -65,13 +65,19 @@ function Login() {
     }
   }
 
-  //Handle Login submit button
-  async function handleSubmitLogin(e) {
-    e.preventDefault();
-    await LoginUser(formData);
-    if (!err) navigate("/dashboard");
+  // Handle Login submit button
+async function handleSubmitLogin(e) {
+  e.preventDefault();
+  try {
+    const response = await LoginUser(formData); // Call LoginUser function
+    if (response) {
+      navigate("/user-profile"); // Navigate only if login is successful
+    }
+  } catch (error) {
+    console.error("Login failed:", error);
+    setLoginError("Invalid username or password"); // Display error message
   }
-
+}
   return (
     <div className="sl-container">
       <div>

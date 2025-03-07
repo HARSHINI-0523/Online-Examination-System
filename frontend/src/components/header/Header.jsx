@@ -14,11 +14,11 @@ function Header(){
                 <div className="website-name"><a href="/" style={{ color: "black" }}>OES</a></div>
                 
                 <div className="header-option">
-                    <Link to="/features">Features </Link> 
+                <Link to="/features">Features</Link>  
                 </div>
                 
                 <div className="header-option">
-                    About us 
+                   <Link to="/AboutUs">About us </Link> 
                 </div>
                 
                 <div className="header-option">

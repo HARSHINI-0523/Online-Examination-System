@@ -8,23 +8,31 @@ function UserLoginStore({ children }){
     let [userLoginStatus,setUserLoginStatus]=useState(false);
     let [err,setError]=useState("");
 
+    //update user details
+    async function updateUser(userCred) {
+       setCurrentUser(userCred);
+    }
     //User login
     async function LoginUser(userCred){
         try{
             let res=await API.post("/user/login",userCred,{ withCredentials: true });
             if(res.status===200){
-                
+                setCurrentUser(res.data.user);
+                setUserLoginStatus(true);
                 checkSession(); // Verify session after login
                 setError("");
+                return res.data;
             }
             else{
                 setError(res.message);
                 setCurrentUser('null');
                 setUserLoginStatus(false);
+                return null;
             }
         }
         catch(error){
             setError(error.message);
+            return null;
         }
     }
 
@@ -50,7 +58,7 @@ function UserLoginStore({ children }){
     }
 
     return (
-        <userLoginContext.Provider value={{ currentUser, userLoginStatus, LoginUser, LogoutUser ,setCurrentUser, err }}>
+        <userLoginContext.Provider value={{ currentUser, userLoginStatus, updateUser, LoginUser, LogoutUser ,setCurrentUser, err }}>
           {children}
         </userLoginContext.Provider>
       );

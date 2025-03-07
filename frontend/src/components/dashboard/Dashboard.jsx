@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 function Dashboard() {
     return(
         <div>
-            <sidebar>
+            
             <div className="dashboard-contents">
                 <Link to="/">Exams</Link>
                 <Link to="/">Notifications</Link>
@@ -14,7 +14,7 @@ function Dashboard() {
                 <Link to="/">Logout</Link>
 
             </div>
-            </sidebar>
+           
         </div>
     )
 }

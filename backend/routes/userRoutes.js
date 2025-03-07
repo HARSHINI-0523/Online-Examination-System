@@ -6,7 +6,7 @@ const User = require("../models/User");
 
 dotenv.config();
 
-//signup
+// Signup
 router.post("/signup", async (req, res) => {
   const { email, username, password } = req.body;
   try {
@@ -35,40 +35,43 @@ router.post("/signup", async (req, res) => {
       sameSite: "Strict",
       maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
-    res.status(201).json({message: "Signup successful" });
+    res.status(201).json({ message: "Signup successful" });
   } catch (error) {
     console.error("Signup error:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
-//login
+// Login
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  const { username, password } = req.body;
   try {
-    const user = await User.findOne({ email });
-    if (!user)
-      return res.status(401).json({ message: "Invalid email or password" });
+    const user = await User.findOne({ username });
+    if (!user) return res.status(401).json({ message: "Invalid username or password" });
+
     const isValidPassword = await user.comparePassword(password);
-    if (!isValidPassword)
-      return res.status(401).json({ message: "Invalid email or password" });
-    
-    res.cookie('examToken', 'secure_random_token', {
-      httpOnly: true, // Prevent access from JavaScript (security)
-      secure: true, // Ensure it's sent over HTTPS
-      sameSite: 'Strict', // Prevent CSRF attacks
-      maxAge: 24*60*60*1000,
+    if (!isValidPassword) return res.status(401).json({ message: "Invalid username or password" });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "24h" });
+
+    res.cookie("examToken", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000,
     });
-    res.status(200).json({message:'Login successful'});
-  } 
-  catch (error) {
+
+    res.status(200).json({ message: "Login successful", user }); // <-- Return user data
+  } catch (error) {
     console.error("Login error:", error);
     res.status(500).json({ message: "Server error" });
   }
 });
 
+
 // Check session (verify cookie)
 router.get("/check-session", (req, res) => {
+  console.log(req.cookies);
   const token = req.cookies.examToken;
   if (!token) return res.status(401).json({ message: "Session expired" });
 
@@ -80,12 +83,25 @@ router.get("/check-session", (req, res) => {
   }
 });
 
-
 // Logout (Clear Cookies)
 router.post("/logout", (req, res) => {
   res.clearCookie("examToken");
   res.json({ message: "Logged out" });
 });
 
+// Update user details
+router.put("/update", async (req, res) => {
+  const { username, ...updateData } = req.body; // Destructure username and update data from request body
+  try {
+    const updatedUser = await User.findOneAndUpdate({username:username}, updateData, { new: true });
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ message: "User updated successfully", user: updatedUser });
+  } catch (error) {
+    console.error("Update error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 module.exports = router;
