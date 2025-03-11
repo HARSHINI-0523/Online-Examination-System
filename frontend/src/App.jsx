@@ -41,22 +41,14 @@ function App() {
           path: "features",
           element: <Features />,
         },
-        
         {
-          path: "update-profile",
-          element: <UpdateProfile />,
-        },
-        {
-          path: "/user-profile",
-          element: <Profile />,
+          path: "dashboard",
+          element: <Dashboard />, // Keep Dashboard persistent
           children: [
-            {
-              path: "/user-profile",
-              element:<Profile/>
-            },
+            { path: "profile", element: <Profile /> },
+            { path: "updateProfile", element: <UpdateProfile /> },
           ],
         },
-      
         
       ],
     },

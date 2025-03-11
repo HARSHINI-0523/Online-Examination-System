@@ -1,44 +1,49 @@
 .update-profile {
-    margin: 50px auto;
-    padding: 30px;
-    border-radius: 15px;
-    background-color: #f4f7f9;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    max-width: 900px;
+    position: absolute; /* Stay in place beside the dashboard */
+    top: 80px; /* Below the header */
+    left: 250px; /* Start from the right of the dashboard */
+    right: 0; /* Extend to the right */
+    bottom: 0px; /* Stay above the footer */
+    padding: 40px;
+    background: #f8f9fa; /* Light background */
+    overflow-y: auto; /* Allow scrolling if needed */
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    z-index: 1000; /* Keep it above other content */
 }
 
+/* Profile Heading */
 h1 {
     color: #2c3e50;
-    text-align: center;
-    margin: 20px 0;
-    font-size: 2.5rem;
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 2rem;
     font-weight: 600;
 }
 
+/* Profile Body */
 .up-body {
     display: flex;
     justify-content: space-between;
     gap: 30px;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 
-/* Left side - Profile Photo and Upload Button */
+/* Left Section - Profile Photo */
 .left-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    width: 200px;
+    width: 220px;
     text-align: center;
 }
 
 .profile-photo {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     background-color: #bdc3c7;
     overflow: hidden;
-    margin-top: -700px;
     border: 4px solid #2980b9;
 }
 
@@ -48,6 +53,7 @@ h1 {
     object-fit: cover;
 }
 
+/* Upload Button */
 .upload-btn {
     padding: 10px 20px;
     background-color: #2980b9;
@@ -57,28 +63,22 @@ h1 {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .upload-btn:hover {
     background-color: #1d6f8f;
 }
 
-.upload-btn:focus {
-    outline: none;
-}
-
-/* Right side - Form */
+/* Right Section - Form */
 .right-section {
-    width: 100%;
-    max-width: 600px;
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .up-form-item {
-    margin: 20px 0;
-    width: 100%;
+    margin-bottom: 20px;
 }
 
 .up-form-item label {
@@ -92,7 +92,7 @@ h1 {
 .up-form-item textarea,
 .up-form-item select {
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 15px;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
     font-size: 1rem;
@@ -108,20 +108,15 @@ h1 {
     outline: none;
 }
 
-.up-form-item input[type="text"],
-.up-form-item input[type="email"],
-.up-form-item input[type="tel"] {
-    height: 40px;
-}
-
 .up-form-item textarea {
-    height: 150px;
+    height: 120px;
     resize: vertical;
 }
 
+/* Update Button */
 .update-btn {
-    margin: 20px 0;
-    padding: 12px 30px;
+    width: 200px;
+    padding: 12px;
     background-color: #2980b9;
     color: white;
     font-size: 1.1rem;
@@ -129,23 +124,28 @@ h1 {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 20px;
 }
 
 .update-btn:hover {
     background-color: #1d6f8f;
 }
 
-.update-btn:focus {
-    outline: none;
-}
-
-.text-secondary {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-    margin-top: 5px;
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .update-profile {
+        left: 230px; /* Adjust for slightly smaller screens */
+    }
 }
 
 @media (max-width: 768px) {
+    .update-profile {
+        left: 0; /* Full width for smaller screens */
+        right: 0;
+        padding: 20px;
+        bottom: 80px; /* Leave space for footer */
+    }
+
     .up-body {
         flex-direction: column;
         align-items: center;
@@ -153,13 +153,26 @@ h1 {
 
     .left-section {
         width: 100%;
-        justify-content: center;
-        text-align: center;
         margin-bottom: 20px;
     }
 
     .right-section {
         width: 100%;
-        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .update-profile {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .upload-btn,
+    .update-btn {
+        width: 100%;
+        padding: 10px;
     }
 }

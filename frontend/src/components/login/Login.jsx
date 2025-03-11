@@ -8,7 +8,7 @@ import LoginAnimation from "../../assets/Animations/LoginAnimation.json";
 import { userLoginContext } from "../../contexts/userLoginContext";
 function Login() {
   let navigate = useNavigate();
-  const { LoginUser, err } = useContext(userLoginContext);
+  const { LoginUser, err , userLoginStatus} = useContext(userLoginContext);
   const [activeTab, setActiveTab] = useState("signup");
   const [formData, setFormData] = useState({
     email: "",
@@ -50,7 +50,8 @@ function Login() {
         let response = await API.post("/user/signup", formData);
         console.log(formData);
         LoginUser(formData);
-        navigate("/update-profile");
+        localStorage.setItem("isNewUser", "true"); // Set new user flag
+        navigate("/dashboard/updateProfile");
       } catch (error) {
         if (error.response) {
           if (error.response.status === 409) {
@@ -69,9 +70,11 @@ function Login() {
 async function handleSubmitLogin(e) {
   e.preventDefault();
   try {
-    const response = await LoginUser(formData); // Call LoginUser function
-    if (response) {
-      navigate("/user-profile"); // Navigate only if login is successful
+    await LoginUser(formData); // Call LoginUser function
+    navigate("/dashboard/profile");
+    if (userLoginStatus==true) {
+      localStorage.setItem("isNewUser", "false"); // Ensure it's false
+      
     }
   } catch (error) {
     console.error("Login failed:", error);

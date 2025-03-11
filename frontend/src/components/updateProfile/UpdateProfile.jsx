@@ -1,5 +1,6 @@
 import "./UpdateProfile.css";
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { userLoginContext } from "../../contexts/userLoginContext";
 import Lottie from "react-lottie";
 import UpAnimation from "../../assets/Animations/UpAnimation.json";
@@ -7,6 +8,7 @@ import API from "../../api/axios"; // Import axios for API calls
 
 function UpdateProfile() {
   const { currentUser, updateUser } = useContext(userLoginContext);
+  const navigate = useNavigate();
 
   // Ensure currentUser is not null before setting formData
   const [formData, setFormData] = useState({
@@ -75,26 +77,28 @@ function UpdateProfile() {
     e.preventDefault();
 
     if (!currentUser) {
-      // You can add any custom logic here if user isn't logged in
       alert("User not logged in.");
       return;
     }
 
     try {
-      const response = await API.put("/user/update", 
+      const response = await API.put(
+        "/user/update",
         {
-          username: currentUser.username, // Pass user ID for update
-          ...formData, // Pass updated user data
-          photo: profileImage, // Update profile picture
+          username: currentUser.username,
+          ...formData,
+          photo: profileImage,
         },
         {
-          withCredentials: true, // Ensure cookies are sent
+          withCredentials: true,
         }
       );
 
       if (response.status === 200) {
         alert("Profile updated successfully!");
         updateUser(response.data.user); // Update context with new data
+        localStorage.setItem("isNewUser", "false"); // Mark user as not new
+        navigate("/dashboard/profile"); // Navigate to profile page immediately
       }
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -129,7 +133,6 @@ function UpdateProfile() {
               <label>Username:</label>
               <input
                 type="text"
-                id="username"
                 name="username"
                 value={formData.username}
                 onChange={handleInputChange}
@@ -140,7 +143,6 @@ function UpdateProfile() {
               <label>Email:</label>
               <input
                 type="email"
-                id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
@@ -149,12 +151,7 @@ function UpdateProfile() {
             </div>
             <div className="up-form-item">
               <label htmlFor="role">Role:</label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
-                onChange={handleInputChange}
-              >
+              <select name="role" value={formData.role} onChange={handleInputChange}>
                 <option value="student">Student</option>
                 <option value="teacher">Teacher</option>
                 <option value="admin">Admin</option>
@@ -164,7 +161,6 @@ function UpdateProfile() {
               <label>Workplace:</label>
               <input
                 type="text"
-                id="work-place"
                 name="workPlace"
                 value={formData.workPlace}
                 onChange={handleInputChange}
@@ -173,38 +169,29 @@ function UpdateProfile() {
             </div>
             <div className="up-form-item">
               <label htmlFor="purpose">Purpose:</label>
-              <select
-                id="purpose"
-                name="purpose"
-                value={formData.purpose}
-                onChange={handleInputChange}
-              >
+              <select name="purpose" value={formData.purpose} onChange={handleInputChange}>
                 <option value="conduct-tests">Conduct Tests</option>
                 <option value="take-tests">Take tests</option>
-                <option value="group">
-                  Form a group to study and improve together
-                </option>
+                <option value="group">Form a group to study and improve together</option>
               </select>
             </div>
             <div className="up-form-item">
               <label>Phone Number:</label>
               <input
                 type="tel"
-                id="phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
-                required
+                
               />
             </div>
             <div className="up-form-item">
               <label>Address:</label>
               <textarea
-                id="address"
                 name="address"
                 value={formData.address}
                 onChange={handleInputChange}
-                required
+               
               />
             </div>
             <button type="submit" className="update-btn">

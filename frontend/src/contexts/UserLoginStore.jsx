@@ -8,6 +8,8 @@ function UserLoginStore({ children }){
     let [userLoginStatus,setUserLoginStatus]=useState(false);
     let [err,setError]=useState("");
 
+    
+
     //update user details
     async function updateUser(userCred) {
        setCurrentUser(userCred);
@@ -17,22 +19,28 @@ function UserLoginStore({ children }){
         try{
             let res=await API.post("/user/login",userCred,{ withCredentials: true });
             if(res.status===200){
+                console.log(res.data)
+                console.log("UserCredentials",userCred)
+                    
                 setCurrentUser(res.data.user);
+                
+                
                 setUserLoginStatus(true);
                 checkSession(); // Verify session after login
                 setError("");
-                return res.data;
+                
+            
             }
             else{
                 setError(res.message);
                 setCurrentUser('null');
                 setUserLoginStatus(false);
-                return null;
+                
             }
         }
         catch(error){
             setError(error.message);
-            return null;
+            
         }
     }
 
@@ -40,7 +48,7 @@ function UserLoginStore({ children }){
     async function checkSession() {
         try {
         let res = await API.get("/user/check-session", { withCredentials: true });
-        setCurrentUser(res.data.userId);
+        
         setUserLoginStatus(true);
         console.log(res.data);
         } catch (error) {
