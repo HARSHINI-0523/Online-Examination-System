@@ -1,0 +1,112 @@
+/* Exams Page Styles */
+.exams {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: "Arial", sans-serif;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Headings */
+  h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin: 20px 0;
+  }
+  
+  /* Create Exam Button Section */
+  .create-exam-btn {
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .create-exam-msg {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .create-exam-btn button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .create-exam-btn button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Exam Cards Container */
+  .exams-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  /* Exam Card */
+  .exam-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    width: 280px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .exam-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .exam-card h3 {
+    font-size: 1.3rem;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .exam-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 5px 0;
+  }
+  
+  /* Unauthorized Message */
+  h1.unauthorized {
+    color: red;
+    font-size: 1.8rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .exams {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .exam-card {
+      width: 100%;
+    }
+  
+    .create-exam-btn {
+      padding: 10px;
+    }
+  }
+  

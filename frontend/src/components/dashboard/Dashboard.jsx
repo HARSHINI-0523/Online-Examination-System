@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { userLoginContext } from "../../contexts/userLoginContext";
-import Profile from "../profile/Profile";
-import UpdateProfile from "../updateProfile/UpdateProfile";
+import { Outlet } from "react-router-dom";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -25,9 +24,6 @@ function Dashboard() {
     navigate(`/dashboard/${activeSection}`);
   }, [activeSection]);
 
-  const handleSidebarClick = (section) => {
-    setActiveSection(section);
-  };
 
   const handleLogout = async () => {
     await LogoutUser();
@@ -39,18 +35,17 @@ function Dashboard() {
   return (
     <div className="dashboard-layout">
       <div className="dashboard-sidebar">
-        <Link to="/">Exams</Link>
+         <Link to="/dashboard/exams">Exams</Link> 
         <Link to="/">Notifications</Link>
         <Link to="/">Detailed Analysis</Link>
-        <button onClick={() => handleSidebarClick("profile")}>Profile</button>
-        <button onClick={() => handleSidebarClick("updateProfile")}>Update Profile</button>
+        <Link to="/dashboard/profile">Profile</Link>
+        <Link to="/dashboard/updateProfile">Update Profile</Link>
         <Link to="/">Change Password</Link>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
 
       <div className="dashboard-main-content">
-        {activeSection === "profile" && <Profile />}
-        {activeSection === "updateProfile" && <UpdateProfile />}
+        <Outlet/>
       </div>
     </div>
   );

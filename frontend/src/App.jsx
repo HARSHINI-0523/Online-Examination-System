@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import Home from "./components/home/Home";
 import Header from "./components/header/Header";
-import AboutUs from "./components/aboutus/AboutUs"; 
+import AboutUs from "./components/aboutus/AboutUs";
 import Footer from "./components/footer/Footer";
 import Login from "./components/login/Login";
 import Feedback from "./components/feedback/Feedback";
@@ -13,7 +13,9 @@ import Dashboard from "./components/dashboard/Dashboard";
 import UpdateProfile from "./components/updateProfile/UpdateProfile";
 import UserLoginStore from "./contexts/UserLoginStore";
 import Features from "./components/features/Features";
-import Profile from "./components/profile/Profile"
+import Profile from "./components/profile/Profile";
+import Exams from "./components/exams/Exams";
+
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -26,7 +28,7 @@ function App() {
           element: <Home />,
         },
         {
-          path: "aboutus", 
+          path: "aboutus",
           element: <AboutUs />,
         },
         {
@@ -47,9 +49,9 @@ function App() {
           children: [
             { path: "profile", element: <Profile /> },
             { path: "updateProfile", element: <UpdateProfile /> },
+            { path: "exams", element: <Exams /> },
           ],
         },
-        
       ],
     },
   ]);
