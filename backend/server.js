@@ -11,6 +11,7 @@ dotenv.config(); //loads environment variables from a .env file into process.env
 
 //import routes
 const userRoutes = require("./routes/userRoutes");
+const examRoutes=require ("./routes/examRoutes");
 
 //Middlewares
 app.use(cors({
@@ -22,6 +23,8 @@ app.use(cookieParser());
 
 //Routes
 app.use("/api/user", userRoutes);
+app.use("/api/exams", examRoutes);
+
 
 //Connect to MongoDB
 mongoose
