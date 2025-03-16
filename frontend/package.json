@@ -20,6 +20,7 @@
     "react-lottie": "^1.2.10",
     "react-router-dom": "^7.1.5",
     "react-waypoint": "^10.3.0",
+    "recharts": "^2.15.1",
     "typed.js": "^2.1.0",
     "typewriter-effect": "^2.21.0"
   },
