@@ -40,7 +40,7 @@ function Dashboard() {
         <Link to="/">Detailed Analysis</Link>
         <Link to="/dashboard/profile">Profile</Link>
         <Link to="/dashboard/updateProfile">Update Profile</Link>
-        <Link to="/">Change Password</Link>
+        <Link to="/dashboard/changepassword">Change Password</Link>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
 
