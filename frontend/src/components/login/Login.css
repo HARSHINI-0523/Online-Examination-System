@@ -87,3 +87,19 @@
     background: #0056b3;
 }
 
+.forgot-password-link {
+    margin-top: 10px;
+    text-align: right;
+  }
+  .link-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0;
+    font-size: 14px;
+  }
+  .link-btn:hover {
+    text-decoration: underline;
+  }
+  

@@ -16,8 +16,11 @@ function Login() {
     password: "",
     confirmPassword: "",
   });
+
+
   const [signUpError, setSignUpError] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [resetPasswordMsg, setResetPasswordMsg] = useState("");
 
   //Animation
   const defaultOptions = {
@@ -39,11 +42,16 @@ function Login() {
   //Active tab
   const handleTabClick = (tab) => {
     setActiveTab(tab);
+    setForgotPasswordMode(false);
   };
 
   //Handle change in formData
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleResetPasswordChange = (e) => {
+    setResetPasswordData({ ...resetPasswordData, [e.target.name]: e.target.value });
   };
 
   //Handle Signup submit button
