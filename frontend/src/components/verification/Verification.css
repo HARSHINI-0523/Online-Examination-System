@@ -1,0 +1,53 @@
+.verification-container {
+    width:100%;
+    margin: auto;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+.request-card {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.request-btns {
+    display: flex;
+    gap: 10px;
+}
+
+.request-a-btn, .request-r-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.request-a-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.request-r-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.request-a-btn:hover {
+    background-color: #45a049;
+}
+
+.request-r-btn:hover {
+    background-color: #d32f2f;
+}

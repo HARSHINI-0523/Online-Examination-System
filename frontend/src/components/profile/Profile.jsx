@@ -46,7 +46,7 @@ function Profile() {
         {/* Profile Image */}
         <div className="profile-image">
           <img
-            src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP_kerHqsbqO2MKCk-B9DBaaFt_QC4R7kBDAI5p-_oY77injCiGG8mJzpON0pDjJ6c0qk&usqp=CAU"}
+            src={currentUser.photo}
             alt="Profile"
           />
         </div>

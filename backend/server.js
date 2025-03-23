@@ -12,7 +12,7 @@ dotenv.config(); //loads environment variables from a .env file into process.env
 //import routes
 const userRoutes = require("./routes/userRoutes");
 const examRoutes=require ("./routes/examRoutes");
-
+const teacherRoutes=require("./routes/teacherRoutes");
 //Middlewares
 app.use(cors({
   origin: "http://localhost:5173",// Frontend URL
@@ -24,6 +24,7 @@ app.use(cookieParser());
 //Routes
 app.use("/api/user", userRoutes);
 app.use("/api/exams", examRoutes);
+app.use("/api/teacher", teacherRoutes);
 
 
 //Connect to MongoDB

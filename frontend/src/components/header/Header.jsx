@@ -10,19 +10,25 @@ function Header() {
     <div>
       <div className="home-header flex">
         <div className="website-name">
-          <a href="/" style={{ color: "black" }}>OES</a>
+          <a href="/" style={{ color: "black" }}>
+            OES
+          </a>
         </div>
-        
+
         <div className="header-option">
-          <Link to="/features">Features</Link>  
+          <Link to="/">Home</Link>
         </div>
-        
+
         <div className="header-option">
-          <Link to="/aboutus">About Us</Link> 
+          <Link to="/features">Features</Link>
         </div>
-        
+
         <div className="header-option">
-          <Link to="/feedback">Feedback</Link>  
+          <Link to="/aboutus">About Us</Link>
+        </div>
+
+        <div className="header-option">
+          <Link to="/feedback">Feedback</Link>
         </div>
 
         <div className="header-option">

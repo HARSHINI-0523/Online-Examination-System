@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const router = express.Router();
 const User = require("../models/User");
 
+
 dotenv.config();
 
 // Signup
@@ -103,5 +104,6 @@ router.put("/update", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 module.exports = router;

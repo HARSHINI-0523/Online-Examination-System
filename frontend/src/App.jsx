@@ -15,7 +15,8 @@ import UserLoginStore from "./contexts/UserLoginStore";
 import Features from "./components/features/Features";
 import Profile from "./components/profile/Profile";
 import Exams from "./components/exams/Exams";
-
+import Verification from "./components/verification/Verification"
+import VerificationProcess from "./components/verificationProcess/VerificationProcess";
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -50,6 +51,8 @@ function App() {
             { path: "profile", element: <Profile /> },
             { path: "updateProfile", element: <UpdateProfile /> },
             { path: "exams", element: <Exams /> },
+            {path:"verify-teacher" , element:<Verification/>},
+            {path:"verification-process",element:<VerificationProcess/>}
           ],
         },
       ],

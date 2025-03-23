@@ -1,7 +1,7 @@
 import "./Login.css";
 import Lottie from "react-lottie";
 import { Link } from "react-router-dom";
-import { useState,useContext } from "react";
+import { useState,useContext, useEffect } from "react";
 import API from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import LoginAnimation from "../../assets/Animations/LoginAnimation.json";
@@ -28,6 +28,13 @@ function Login() {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  useEffect(() => {
+    if (userLoginStatus) {
+        navigate("/dashboard/profile");
+        localStorage.setItem("isNewUser", "false");
+    }
+}, [userLoginStatus]); // Runs when `userLoginStatus` changes
 
   //Active tab
   const handleTabClick = (tab) => {
@@ -67,20 +74,34 @@ function Login() {
   }
 
   // Handle Login submit button
-async function handleSubmitLogin(e) {
-  e.preventDefault();
-  try {
-    await LoginUser(formData); // Call LoginUser function
-    navigate("/dashboard/profile");
-    if (userLoginStatus==true) {
-      localStorage.setItem("isNewUser", "false"); // Ensure it's false
+  async function handleSubmitLogin(e) {
+    e.preventDefault();
+    try {
+      const response = await API.get("/teacher/is-unverified", {
+        params: { username: formData.username }, 
+        withCredentials: true,
+      });
       
+      if (response.data.isUnverified) { 
+        navigate("/dashboard/verification-process");
+        return; // Stop further execution if unverified
+      }
+  
+      await LoginUser(formData);
+      if(userLoginStatus===true){
+        localStorage.setItem("isNewUser", "false"); 
+        navigate("/dashboard/profile");
+      }
+      else{
+        alert("Not a valid user.Need to Signup first..")
+      }
+     
+    } catch (error) {
+      console.error("Login failed:", error);
+      setLoginError("Invalid username or password"); 
     }
-  } catch (error) {
-    console.error("Login failed:", error);
-    setLoginError("Invalid username or password"); // Display error message
   }
-}
+  
   return (
     <div className="sl-container">
       <div>
