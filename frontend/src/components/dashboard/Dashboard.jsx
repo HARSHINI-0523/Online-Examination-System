@@ -101,7 +101,7 @@ function Dashboard() {
         {currentUser?.role === "admin" && (
           <Link to="/dashboard/verify-teacher">Verification</Link>
         )}
-        <Link to="/">Change Password</Link>
+        <Link to="/dashboard/changepassword">Change Password</Link>
         <button onClick={handleLogout} className="logout-btn">Logout</button>
       </div>
 
