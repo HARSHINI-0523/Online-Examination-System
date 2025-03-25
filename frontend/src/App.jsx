@@ -18,6 +18,7 @@ import Exams from "./components/exams/Exams";
 import Verification from "./components/verification/Verification"
 import VerificationProcess from "./components/verificationProcess/VerificationProcess";
 import ChangePassword from "./components/changepassword/ChangePassword";
+import ExamPage from "./components/examPage/ExamPage";
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -54,6 +55,7 @@ function App() {
             { path: "exams", element: <Exams /> },
             {path:"verify-teacher" , element:<Verification/>},
             {path:"verification-process",element:<VerificationProcess/>},
+            {path:`exam/:examId`,element:<ExamPage/>},
             {
               path: "changepassword",
               element: <ChangePassword />,

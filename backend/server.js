@@ -6,6 +6,10 @@ const path = require("path");
 const dotenv = require("dotenv");
 const cookieParser=require('cookie-parser');
 
+const events = require("events");
+events.EventEmitter.defaultMaxListeners = 20;
+
+
 const app = express(); //express application object
 dotenv.config(); //loads environment variables from a .env file into process.env
 

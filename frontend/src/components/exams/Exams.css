@@ -483,6 +483,76 @@ textarea {
   margin-bottom: 25px;
 }
 
-/* .delete-btn {
-  margin-left: 15px;
-} */
+
+
+.created-exams {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exam-card {
+  width: 300px;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
+  position: relative;
+  text-align: center; /* Ensures text inside is centered */
+}
+
+.exam-card:hover {
+  transform: translateY(-5px);
+}
+
+.exam-image {
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.exam-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.exam-title {
+  flex: 1;
+  text-align: center; /* Centers text inside */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.menu-icon {
+  position: absolute;
+  right: 0; /* Pushes icon to the right */
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.exam-link, .pdf-btn {
+  display: inline-block;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease-in-out;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.exam-link:hover, .pdf-btn:hover {
+  background: #0056b3;
+}
+
+.pdf-btn {
+  background: #28a745;
+}
