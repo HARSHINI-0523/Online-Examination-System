@@ -486,8 +486,13 @@ textarea {
 
 
 .created-exams {
+  gap: 1.5rem;
+}
+
+
+.created-exam{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1.5rem;
 }
 

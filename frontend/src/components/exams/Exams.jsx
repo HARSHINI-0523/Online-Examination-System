@@ -207,9 +207,11 @@ function Exams() {
       )}
 
       {step === 0 && (
+        
         <div className="created-exams">
           <h2>Your Created Exams</h2>
           <hr />
+          <div className="created-exam">
           {exams.length === 0 ? (
             <p>No exams created yet.</p>
           ) : (
@@ -265,8 +267,11 @@ function Exams() {
                   </button>
                 )}
               </div>
+              
             ))
+            
           )}
+          </div>
         </div>
       )}
 
