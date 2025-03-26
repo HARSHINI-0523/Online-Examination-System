@@ -27,6 +27,11 @@ function Exams() {
 
   const [openMenuId, setOpenMenuId] = useState(null);
 
+  const [showInstructions, setShowInstructions] = useState(false);
+  const [agreed, setAgreed] = useState(false);
+  const [examLink, setExamLink] = useState("");
+  
+
   const toggleMenu = (examId) => {
     setOpenMenuId(openMenuId === examId ? null : examId);
   };
@@ -35,12 +40,12 @@ function Exams() {
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenGroupModal = async() => {
+  const handleOpenGroupModal = async () => {
     if (!currentUser || !currentUser.id) {
       console.error("User is not logged in or user ID is missing.");
       return;
     }
-  
+
     setIsModalOpen(true);
     try {
       const response = await API.get(`/groups/user/${currentUser.id}`);
@@ -49,8 +54,6 @@ function Exams() {
       console.error("Error fetching groups:", error);
     }
   };
-  
-  
 
   useEffect(() => {
     const fetchExams = async () => {
@@ -93,6 +96,18 @@ function Exams() {
   const handlePublishExam = (questions) => {
     setSavedQuestions(questions);
     setStep(3); // Move to step 3 (Preview & Create Quiz)
+  };
+
+  const openInstructionsModal = (link) => {
+    setExamLink(link);
+    setShowInstructions(true);
+  };
+
+  const handleTakeExam = () => {
+    if (agreed) {
+      window.open(examLink, "_blank"); // Navigate to exam page
+      setShowInstructions(false); // Close modal
+    }
   };
 
   // Submit Exam (Final Step)
@@ -169,7 +184,7 @@ function Exams() {
     setSelectedGroup(group);
     setIsModalOpen(false);
   };
-  const handlePostToGroup = async() => {
+  const handlePostToGroup = async () => {
     if (!selectedGroup) {
       alert("Please select a group first!");
       return;
@@ -180,17 +195,13 @@ function Exams() {
       groupId: selectedGroup._id,
       userId: currentUser?.id, // ✅ Use currentUser.id
     };
-    
 
-    try{
-      const res=await API.post("/posts/group",{withCredentials:true});
-      console.log("Post submiited: ",res.data);
-
-    }
-    catch(error){
+    try {
+      const res = await API.post("/posts/group", { withCredentials: true });
+      console.log("Post submiited: ", res.data);
+    } catch (error) {
       console.error(error);
     }
-    
   };
 
   return (
@@ -207,70 +218,125 @@ function Exams() {
       )}
 
       {step === 0 && (
-        
         <div className="created-exams">
           <h2>Your Created Exams</h2>
           <hr />
           <div className="created-exam">
-          {exams.length === 0 ? (
-            <p>No exams created yet.</p>
-          ) : (
-            exams.map((exam) => (
-              <div key={exam.id} className="exam-card">
-                <img
-                  src="https://cdn3.iconfinder.com/data/icons/immigration-process/273/migrate-migration-004-1024.png"
-                  alt="Exam image"
-                  className="exam-image"
-                />
-                <hr />
-                {/* Title and Menu Icon in a row */}
-                <div className="exam-header">
-                  <h3>{exam.testPaperName}</h3>
-                  <div className="menu-container">
-                    <TiThMenu
-                      className="menu-icon"
-                      onClick={() => toggleMenu(exam.id)}
-                    />
-                    {openMenuId === exam.id && (
-                      <div className="dropdown-menu">
-                        <button onClick={handleOpenGroupModal}>
-                          Post in Group
-                        </button>
-                      </div>
-                    )}
+            {exams.length === 0 ? (
+              <p>No exams created yet.</p>
+            ) : (
+              exams.map((exam) => (
+                <div key={exam.id} className="exam-card">
+                  <img
+                    src="https://cdn3.iconfinder.com/data/icons/immigration-process/273/migrate-migration-004-1024.png"
+                    alt="Exam image"
+                    className="exam-image"
+                  />
+                  <hr />
+                  {/* Title and Menu Icon in a row */}
+                  <div className="exam-header">
+                    <h3>{exam.testPaperName}</h3>
+                    <div className="menu-container">
+                      <TiThMenu
+                        className="menu-icon"
+                        onClick={() => toggleMenu(exam.id)}
+                      />
+                      {openMenuId === exam.id && (
+                        <div className="dropdown-menu">
+                          <button onClick={handleOpenGroupModal}>
+                            Post in Group
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
+                  <p className="subject">Subject : {exam.subject}</p>
+                  <p className="numQuestions">
+                    📄 Questions: {exam.numQuestions}
+                  </p>
+                  <p className="time-allotted">
+                    ⏳ Time: {exam.timeAllowed} mins
+                  </p>
+                  {exam.examType === "online-test" ? (
+                    //
+                    <button
+                      onClick={() => openInstructionsModal(exam.examLink)}
+                    >
+                      Take Exam
+                    </button>
+                  ) : (
+                    <button
+                      className="pdf-btn"
+                      onClick={() =>
+                        generatePDF(exam.questions, exam.testPaperName)
+                      }
+                    >
+                      📄 Download PDF
+                    </button>
+                  )}
                 </div>
-                <p className="subject">Subject : {exam.subject}</p>
-                <p className="numQuestions">
-                  📄 Questions: {exam.numQuestions}
-                </p>
-                <p className="time-allotted">
-                  ⏳ Time: {exam.timeAllowed} mins
-                </p>
-                {exam.examType === "online-test" ? (
-                  <a
-                    href={exam.examLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="exam-link"
-                  >
-                    Take Exam
-                  </a>
-                ) : (
-                  <button
-                    className="pdf-btn"
-                    onClick={() =>
-                      generatePDF(exam.questions, exam.testPaperName)
-                    }
-                  >
-                    📄 Download PDF
-                  </button>
-                )}
-              </div>
-              
-            ))
-            
-          )}
+              ))
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Exam Instructions */}
+      {showInstructions && (
+        <div className="instruction-modal-overlay">
+          <div className="instructrion-modal-content">
+            <h2  >Exam Instructions</h2>
+            <p>
+              📌 Ensure a stable internet connection throughout the test to
+              avoid interruptions.
+            </p>
+            <p>
+              📌 Do not refresh, close, or navigate away from the exam page, as
+              this may result in automatic submission or disqualification.
+            </p>
+            <p>
+              📌 The timer starts as soon as you begin the exam and cannot be
+              paused. Manage your time wisely.
+            </p>
+            <p>
+              📌 Answer all questions carefully before submitting. Unanswered
+              questions may impact your final score.
+            </p>
+            <p>
+              📌 This test is proctored. Your activities may be monitored during
+              the exam to ensure fair conduct.
+            </p>
+            <p>
+              📌 Switching to other tabs is strictly prohibited. If detected,
+              the system may auto-submit your test or disqualify you.
+            </p>
+            <p>
+              📌 Full Screen Mode will be enabled once the exam begins. Exiting
+              full-screen mode may lead to warnings or submission.
+            </p>
+            <p>
+              📌Enable "Do Not Disturb" Mode to block all notifications during the test to minimize
+              distractions. Ensure your device is set accordingly.
+            </p>
+            <p>
+              📌 You may or may not be allowed to retake this test based on exam
+              policies.
+            </p>
+
+            <div className="instruction-checkbox-container">
+              <input
+                type="checkbox"
+                id="agree"
+                checked={agreed}
+                onChange={() => setAgreed(!agreed)}
+              />
+              <label htmlFor="agree">I agree to the instructions</label>
+            </div>
+
+            <button onClick={handleTakeExam} disabled={!agreed}>
+              Proceed to Exam
+            </button>
+            <button onClick={() => setShowInstructions(false)}>Cancel</button>
           </div>
         </div>
       )}
