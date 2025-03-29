@@ -35,7 +35,7 @@ export default function Features() {
     <div className="features-container">
       {/* Header Section */}
       <motion.header
-        className="header"
+        className="feature-page-header"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}

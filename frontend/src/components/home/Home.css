@@ -41,7 +41,7 @@
     perspective: 1000px;
 }
 
-.feature-pts .pt {
+.feature-pts .feature-pt {
     background-color: rgb(234, 248, 253);
     width: 370px;
     height: 270px;
@@ -54,7 +54,7 @@
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-.feature-pts .pt:hover {
+.feature-pts .feature-pt:hover {
     transform: rotateY(20deg) rotateX(10deg) scale(1.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
@@ -88,7 +88,7 @@
         opacity:0;
     }
     
-    .feature-pts .pt{
+    .feature-pts .feature-pt{
         width:300px;
         height:250px;
         margin:0;
@@ -115,7 +115,7 @@
         opacity:0;
     }
 
-    .feature-pts .pt{
+    .feature-pts .feature-pt{
         width:300px;
         height:250px;
         margin:0;

@@ -18,6 +18,12 @@ function UserLoginStore({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    if (userLoginStatus) {
+      checkSession();
+    }
+  }, [userLoginStatus]);
+  
   //update user details
   async function updateUser(userCred) {
     setCurrentUser(userCred);

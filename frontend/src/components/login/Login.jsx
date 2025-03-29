@@ -118,13 +118,13 @@ function Login() {
       <div className="sl-form-container">
         <div className="sl-tabs">
           <button
-            className={`sl-tab-btn ${activeTab === "signup" ? "active" : ""}`}
+            className={`signup-login-tab-btn ${activeTab === "signup" ? "active-slp" : ""}`}
             onClick={() => handleTabClick("signup")}
           >
             Signup
           </button>
           <button
-            className={`sl-tab-btn ${activeTab === "login" ? "active" : ""}`}
+            className={`signup-login-tab-btn ${activeTab === "login" ? "active-slp" : ""}`}
             onClick={() => handleTabClick("login")}
           >
             Login

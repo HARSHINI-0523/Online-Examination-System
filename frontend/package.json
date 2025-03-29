@@ -23,6 +23,7 @@
     "react-lottie": "^1.2.10",
     "react-router-dom": "^7.1.5",
     "react-waypoint": "^10.3.0",
+    "react-webcam": "^7.2.0",
     "recharts": "^2.15.1",
     "typed.js": "^2.1.0",
     "typewriter-effect": "^2.21.0",
@@ -39,5 +40,8 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "vite": "^6.2.2"
+  },
+  "overrides": {
+    "node-fetch": "^2.6.7"
   }
 }

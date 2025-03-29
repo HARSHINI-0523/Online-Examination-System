@@ -29,11 +29,11 @@
 }
 
 .dashboard-sidebar a:hover,
-.dashboard-sidebar button:hover {
+.dashboard-sidebar .logout-btn:hover {
   background: #007bff;
 }
 
-.dashboard-sidebar button:focus {
+.dashboard-sidebar .logout-btn:focus {
   outline: none;
 }
 
@@ -43,12 +43,12 @@
   overflow-y: auto;
 }
 
-.logout-button {
-  margin-top: auto; /* Pushes Logout to the bottom */
+/* .logout-button {
+  margin-top: auto; /* Pushes Logout to the bottom 
   background: #d9534f;
 }
 
 .logout-button:hover {
   background: #c9302c;
 }
-
+ */

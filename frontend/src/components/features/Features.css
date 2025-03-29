@@ -13,13 +13,13 @@ body {
   }
   
   /* Header */
-  .header h1 {
+  .feature-page-header h1 {
     font-size: 2.8rem;
     color: #333;
     margin-bottom: 20px;
   }
   
-  .header p {
+  .feature-page-header p {
     font-size: 1.2rem;
     color: #555;
   }

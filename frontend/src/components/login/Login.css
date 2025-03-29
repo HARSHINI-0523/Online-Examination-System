@@ -14,7 +14,7 @@
     gap: 10px; /* Adds space between buttons */
     margin: 0 auto; /* Centers within parent */
 }
-.sl-tab-btn {
+.signup-login-tab-btn {
     flex: 1;
     padding: 10px;
     border: none;
@@ -28,11 +28,11 @@
     max-width:100px;
 }
 
-.sl-tab-btn:hover {
+.signup-login-tab-btn:hover {
     background: #d0f0ff;
 }
 
-.active {
+.active-slp {
     font-weight: 600;
     color: #007bff;
 }

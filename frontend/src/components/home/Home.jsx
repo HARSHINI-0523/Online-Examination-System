@@ -64,13 +64,13 @@ function Home() {
 
         <div className="feature-pts">
           <motion.header
-            className="header"
+            className="motion-header"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInRight}
           >
-            <div className="pt">
+            <div className="feature-pt">
               <h3>Proctored Test</h3>
 
               <ul>
@@ -104,13 +104,13 @@ function Home() {
             />
           </div>
           <motion.header
-            className="header"
+            className="motion-header"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInLeft}
           >
-            <div className="pt">
+            <div className="feature-pt">
               <h3>Test Analytics</h3>
               <ul>
                 <li>
@@ -129,13 +129,13 @@ function Home() {
 
         <div className="feature-pts">
           <motion.header
-            className="header"
+            className="motion-header"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInRight}
           >
-            <div className="pt">
+            <div className="feature-pt">
               <h3>Secure Browser</h3>
 
               <ul>

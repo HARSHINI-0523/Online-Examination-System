@@ -478,7 +478,7 @@ textarea {
   margin-bottom: 30px;
 }
 
-.submit-btn {
+.create-exam-submit-btn {
   margin-top: 20px;
   margin-bottom: 25px;
 }
@@ -607,7 +607,7 @@ textarea {
 }
 
 
-button {
+.exams-container button {
   background: #007bff;
   color: white;
   padding: 10px 15px;
@@ -617,12 +617,12 @@ button {
   margin: 5px;
 }
 
-button:disabled {
+.exams-container button:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
+.exams-container button:hover:not(:disabled) {
   background: #0056b3;
 }
 
