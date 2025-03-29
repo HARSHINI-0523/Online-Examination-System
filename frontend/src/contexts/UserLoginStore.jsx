@@ -40,7 +40,7 @@ function UserLoginStore({ children }) {
         const tempUser = res.data.user;
         tempUser.password = userCred.password;
         setCurrentUser(tempUser);
-        setUserLoginStatus(true);
+        await setUserLoginStatus(true);
 
         // Store user data in localStorage
         localStorage.setItem("currentUser", JSON.stringify(tempUser));

@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import API from "../../api/axios";
 import * as faceapi from "face-api.js";
 import Webcam from "react-webcam";
+import { useNavigate } from "react-router-dom";
 
 function ExamPage() {
+  const navigate=useNavigate();
   const { examId } = useParams();
   const [exam, setExam] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -17,9 +19,12 @@ function ExamPage() {
   const [faceMissCount, setFaceMissCount] = useState(0);
   const [cameraAllowed, setCameraAllowed] = useState(true);
   const [showCameraModal, setShowCameraModal] = useState(false);
-
+  const [userResponses, setUserResponses] = useState({});
+  const [examResult, setExamResult] = useState(null);
+  const [exId, setExId] = useState();
   const webcamRef = useRef(null);
 
+  //Checks camera permission
   const checkCameraPermission = async () => {
     try {
       await navigator.mediaDevices.getUserMedia({ video: true });
@@ -41,6 +46,7 @@ function ExamPage() {
     checkCameraPermission();
   }, []);
 
+  //Loads face api models
   const loadFaceAPImodels = async () => {
     try {
       await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
@@ -51,6 +57,7 @@ function ExamPage() {
     }
   };
 
+  //Detects face
   const detectFace = useCallback(async () => {
     if (!webcamRef.current || !modelsLoaded) return;
 
@@ -82,6 +89,7 @@ function ExamPage() {
     }
   }, [modelsLoaded]);
 
+  // Detects face continuously
   useEffect(() => {
     let animationFrameId;
     const detectContinuously = async () => {
@@ -96,6 +104,7 @@ function ExamPage() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [modelsLoaded, timerStarted, detectFace]);
 
+  //Face Detection failed
   useEffect(() => {
     if (faceMissCount >= 5) {
       alert("Too many face detection failures! Exam will be submitted.");
@@ -103,11 +112,14 @@ function ExamPage() {
     }
   }, [faceMissCount]);
 
+  //Loads exam
   useEffect(() => {
     const fetchExam = async () => {
       try {
         const res = await API.get(`/exams/get-exam/${examId}`);
+        console.log(res.data);
         setExam(res.data);
+        setExId(res.data._id);
         setTimeLeft(res.data.timeAllowed * 60);
       } catch (error) {
         console.error("Failed to load exam:", error);
@@ -118,6 +130,7 @@ function ExamPage() {
     fetchExam();
   }, [examId]);
 
+  //Timer
   useEffect(() => {
     if (!timerStarted || timeLeft === null) return;
     if (timeLeft <= 0) {
@@ -128,9 +141,64 @@ function ExamPage() {
     return () => clearInterval(timer);
   }, [timeLeft, timerStarted]);
 
-  const handleSubmitExam = () => {
-    alert("Your exam is being submitted.");
-    // Add submission logic here
+  //Handles user responses
+  const handleResponseChange = (questionId, answer) => {
+    setUserResponses((prev) => ({
+      ...prev,
+      [questionId]: answer,
+    }));
+    console.log("User Responses: ", userResponses);
+  };
+
+  // Function to calculate score
+  const calculateScore = (exam, userResponses) => {
+    let score = 0;
+  
+    exam.questions.forEach((question) => {
+      console.log("Question ID:", question.id);
+      console.log("Correct Answers:", question.correctAnswers);
+      console.log("User Response:", userResponses[question.id]);
+  
+      // Ensure correctAnswers exists and is an array
+      if (Array.isArray(question.correctAnswers) && question.correctAnswers.includes(userResponses[question.id])) {
+        score += parseInt(question.marks) || 1; // Convert marks to number, default to 1 if missing
+      }
+    });
+  
+    return score;
+  };
+  
+
+  //Handles exam submission
+  const handleSubmitExam = async () => {
+    if (!exam) return;
+
+    //calculate score
+    const score = calculateScore(exam, userResponses);
+    console.log("Score",score);
+    
+    const submissionData = {
+      exId,
+      responses: userResponses,
+      score,
+      submissionTime: new Date().toISOString(),
+    };
+    console.log("Submission data:",submissionData)
+    try {
+      const response = await API.post("/exams/submit-exam", submissionData, {
+        withCredentials: true,
+      });
+
+      if (response.status === 200) {
+        alert("Exam submitted successfully!");
+        navigate(`/dashboard/results/${exId}`);
+      } else {
+        alert("Failed to submit exam. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting exam:", error);
+      alert("An error occurred while submitting your exam.");
+    }
   };
 
   const formatTime = (seconds) => {
@@ -183,7 +251,14 @@ function ExamPage() {
               </p>
               {q.options?.map((opt, i) => (
                 <label key={i}>
-                  <input type="radio" name={`q${index}`} value={opt} /> {opt}
+                  <input
+                    type="radio"
+                    name={`q${index}`}
+                    value={opt}
+                    checked={userResponses[q.id] === i}
+                    onChange={() => handleResponseChange(q.id, i)}
+                  />{" "}
+                  {opt}
                 </label>
               ))}
             </div>
@@ -191,6 +266,7 @@ function ExamPage() {
           <button onClick={handleSubmitExam}>Submit Exam</button>
         </>
       )}
+      
       {showCameraModal && (
         <div className="camera-warning-modal">
           <div className="camera-warning-modal-content">

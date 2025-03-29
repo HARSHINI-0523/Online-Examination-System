@@ -19,6 +19,7 @@ import Verification from "./components/verification/Verification"
 import VerificationProcess from "./components/verificationProcess/VerificationProcess";
 import ChangePassword from "./components/changepassword/ChangePassword";
 import ExamPage from "./components/examPage/ExamPage";
+import Results from "./components/results/Results";
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -59,6 +60,10 @@ function App() {
             {
               path: "changepassword",
               element: <ChangePassword />,
+            },
+            {
+              path: "results/:examId",
+              element: <Results />,
             }
           ],
         },

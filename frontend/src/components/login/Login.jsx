@@ -95,8 +95,12 @@ function Login() {
         return; // Stop further execution if unverified
       }
   
-      await LoginUser(formData);
-      if(userLoginStatus===true){
+      const loginResponse = await LoginUser(formData); // Await the login process
+
+        // Fetch the updated login status from localStorage or directly check if login was successful
+        const updatedLoginStatus = JSON.parse(localStorage.getItem("userLoginStatus"));
+
+        if (updatedLoginStatus) { 
         localStorage.setItem("isNewUser", "false"); 
         navigate("/dashboard/profile");
       }

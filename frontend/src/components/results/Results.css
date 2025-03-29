@@ -1,0 +1,53 @@
+.results-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .results-container h2, h3 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .result-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .responses-list {
+    text-align: left;
+  }
+  
+  .response-item {
+    background: #eef1f6;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .response-item p {
+    margin: 5px 0;
+  }
+  
+  .correct {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .incorrect {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .loading, .error {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+  }
+  

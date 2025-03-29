@@ -4,6 +4,7 @@
 }
 
 .dashboard-sidebar {
+  background-color: rgb(234, 248, 253);
   width: 250px;
   display: flex;
   flex-direction: column;
