@@ -2,13 +2,18 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { userLoginContext } from "../../contexts/userLoginContext";
+import {useLocation} from "react-router-dom";
 
 function Header() {
   const { userLoginStatus } = useContext(userLoginContext);
 
+  const location = useLocation();
+  const isExamPage = location.pathname.includes("/dashboard/exam/");
   return (
-    <div>
+    <div className= {`${isExamPage ? "exam-mode" : ""}`}>
+       {!isExamPage &&(
       <div className="home-header flex">
+       
         <div className="website-name">
           <a href="/" style={{ color: "black" }}>
             OES
@@ -43,6 +48,7 @@ function Header() {
           <button className="btn btn-primary">Take Demo Test</button>
         </div>
       </div>
+      )}
     </div>
   );
 }

@@ -228,9 +228,7 @@ function ExamPage() {
       <p>
         <strong>Time Allowed:</strong> {exam.timeAllowed} minutes
       </p>
-      <p>
-        <strong>Instructions:</strong> {exam.generalInstructions}
-      </p>
+      
       <div className="camera-container">
         <Webcam
           audio={false}
@@ -245,7 +243,7 @@ function ExamPage() {
       ) : (
         <>
           {exam.questions.map((q, index) => (
-            <div key={q.id} className="question">
+            <div key={q.id} className="questionEP">
               <p>
                 <strong>Q{index + 1}:</strong> {q.question}
               </p>
