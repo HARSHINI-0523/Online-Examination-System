@@ -7,8 +7,18 @@ import ClassRooms from "../classrooms/ClassRooms";
 
 function Profile() {
   const { currentUser } = useContext(userLoginContext);
-
-  
+  const [classrooms, setClassrooms] = useState([]);
+  useEffect(() => {
+    async function loadClassrooms() {
+      try {
+        const res = await API.get("/profile/classrooms");
+        setClassrooms(res.data);
+      } catch (error) {
+        console.error("Error fetching classrooms:", error);
+      }
+    }
+    loadClassrooms();
+  }, []);
 
   if (!currentUser) return <p>Loading...</p>;
 
