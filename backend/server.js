@@ -20,9 +20,12 @@ app.get("/", (req, res) => {
 
 // ✅ Apply CORS settings before defining routes
 app.use(cors({
-  origin:"https://online-examination-system-zeta.vercel.app/dashboard/profile",
+  origin: "https://online-examination-system-zeta.vercel.app",
   credentials: true,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization",
 }));
+
 
 app.use(express.json());
 app.use(cookieParser());
