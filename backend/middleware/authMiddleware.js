@@ -5,6 +5,7 @@ dotenv.config();
 
 const authMiddleware = (req, res, next) => {
   const token = req.cookies.examToken; // Get JWT from cookies
+  console.log(req);
   console.log(token);
   if (!token) {
     return res.status(401).json({ message: "Unauthorized: No token found" });
