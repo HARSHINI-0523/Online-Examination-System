@@ -1,41 +1,49 @@
-//import modules
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
-const cookieParser=require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 const events = require("events");
 events.EventEmitter.defaultMaxListeners = 20;
 
+dotenv.config();
 
-const app = express(); //express application object
-dotenv.config(); //loads environment variables from a .env file into process.env
-
-//import routes
+// Import Routes
 const userRoutes = require("./routes/userRoutes");
-const examRoutes=require ("./routes/examRoutes");
-const teacherRoutes=require("./routes/teacherRoutes");
-const classroomRoutes=require("./routes/classroomRoutes");
+const examRoutes = require("./routes/examRoutes");
+const teacherRoutes = require("./routes/teacherRoutes");
+const classroomRoutes = require("./routes/classroomRoutes");
 
-//Middlewares
+const app = express();
+
+// Middlewares
 app.use(cors({
-  origin: "http://localhost:5173",// Frontend URL
+  origin: "http://localhost:5173", // Frontend URL
   credentials: true, // Allow sending cookies
 }));
 app.use(express.json());
 app.use(cookieParser());
 
-//Routes
 app.use("/api/user", userRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/teacher", teacherRoutes);
 app.use("/api/classrooms", classroomRoutes);
 
-//Connect to MongoDB
-mongoose
-  .connect(process.env.MONGO_URI)
+const __dirname = path.resolve();
+
+// Serve Frontend in Production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(process.env.PORT, () => {

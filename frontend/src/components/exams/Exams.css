@@ -714,3 +714,33 @@ textarea {
     transform: scale(1);
   }
 }
+
+.dropdown-menu {
+  display: block ;
+  position: absolute;
+  background: white;
+  border: 1px solid #ddd;
+  padding: 10px;
+  z-index: 999; /* Ensure it's above other elements */
+}
+
+.delete-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+.delete-btn:hover {
+  background: darkred;
+}
+
+.menu-icon {
+  position: absolute;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  margin-top: -15px;
+  margin-left: 20px;
+}

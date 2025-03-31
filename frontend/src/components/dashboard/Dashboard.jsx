@@ -43,7 +43,7 @@ function Dashboard() {
       <div className="dashboard-sidebar">
         <Link to="/dashboard/exams">Exams</Link> 
         <Link to="/">Notifications</Link>
-        <Link to="/">Detailed Analysis</Link>
+        <Link to="/dashboard/detailed-analysis">Detailed Analysis</Link>
         <Link to="/dashboard/updateProfile">Update Profile</Link>
         {currentUser?.role === "admin" && (
           <Link to="/dashboard/verify-teacher">Verification</Link>

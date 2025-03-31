@@ -6,6 +6,7 @@ const Submission = require("../models/Submission");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Classroom=require("../models/Classroom");
+const DetailedAnalysis = require("../models/DetailedAnalysis");  // Adjust path if needed
 
 
 // Create a new exam
@@ -228,5 +229,32 @@ router.get("/student-get-exams",authMiddleware, async (req, res) => {
   }
 });
 
+router.delete('/delete/:examId', async (req, res) => {
+  const { examId } = req.params;
+  try {
+      const deletedExam = await Exam.findByIdAndDelete(examId);
+      if (!deletedExam) {
+          return res.status(404).json({ message: "Exam not found" });
+      }
+      res.status(200).json({ message: "Exam deleted successfully" });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
+router.get("/detailed-analysis", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const data = await DetailedAnalysis.find({ userId: req.user.id });
+    if (!data.length) {
+      return res.status(404).json({ message: "No detailed analysis found." });
+    }
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error fetching detailed analysis:", error);
+    res.status(500).json({ message: "Server error. Please try again later." });
+  }
+});
 
 module.exports = router;

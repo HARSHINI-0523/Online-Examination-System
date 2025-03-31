@@ -20,6 +20,7 @@ import VerificationProcess from "./components/verificationProcess/VerificationPr
 import ChangePassword from "./components/changepassword/ChangePassword";
 import ExamPage from "./components/examPage/ExamPage";
 import Results from "./components/results/Results";
+import DetailedAnalysis from "./components/analysis/DetailedAnalysis";
 
 function App() {
   const browserRouter = createBrowserRouter([
@@ -57,6 +58,7 @@ function App() {
             {path:"verify-teacher" , element:<Verification/>},
             {path:"verification-process",element:<VerificationProcess/>},
             {path:`exam/:examId`,element:<ExamPage/>},
+            { path: "detailed-analysis", element: <DetailedAnalysis /> },
             {
               path: "changepassword",
               element: <ChangePassword />,

@@ -1,0 +1,22 @@
+{
+  "name": "online-examination-system",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000O\u0000n\u0000l\u0000i\u0000n\u0000e\u0000-\u0000E\u0000x\u0000a\u0000m\u0000i\u0000n\u0000a\u0000t\u0000i\u0000o\u0000n\u0000-\u0000S\u0000y\u0000s\u0000t\u0000e\u0000m\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite", 
+   "build" :"npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start":"npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnjusriKandi/Online-Examination-System.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnjusriKandi/Online-Examination-System/issues"
+  },
+  "homepage": "https://github.com/AnjusriKandi/Online-Examination-System#readme"
+}

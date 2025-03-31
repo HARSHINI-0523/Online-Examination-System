@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from "react";
 import { userLoginContext } from "../../contexts/userLoginContext";
 import API from "../../api/axios";
 import jsPDF from "jspdf";
+import { TiThMenu } from "react-icons/ti";
 import CreateExam from "../createExam/CreateExam";
 
 function Exams() {
@@ -23,6 +24,12 @@ function Exams() {
   const isStudent = currentUser?.role === "student";
   const [examId, setExamId] = useState(null);
  
+  
+  const toggleMenu = (examId) => {
+    console.log("Toggling menu for exam ID:", examId);
+    setOpenMenuId((prevMenuId) => (prevMenuId === examId ? null : examId));
+  };
+
   //get all groups user is part of
   const handleOpenGroupModal = async () => {
     if (!currentUser || !currentUser._id) {
@@ -162,6 +169,27 @@ function Exams() {
     setShowCreateExam(false); // Hide create exam form
   };
 
+  const handleDeleteExam = async (examId) => {
+    console.log("Exam ID received:", examId); // Debugging step
+  
+    if (!examId) {
+      console.error("Error: Exam ID is undefined.");
+      return;
+    }
+  
+    if (!window.confirm("Are you sure you want to delete this exam?")) return;
+  
+    try {
+      await API.delete(`/exams/delete/${examId}`, {
+        withCredentials: true,
+      });
+  
+      setExams(exams.filter((exam) => exam._id !== examId)); // Use `_id` if MongoDB
+    } catch (error) {
+      console.error("Error deleting exam:", error);
+    }
+  };
+
   return (
     <div className="exams-container">
       <h1 className="exam-heading">Exams</h1>
@@ -201,6 +229,22 @@ function Exams() {
                     <hr />
                     <div className="exam-header">
                       <h3>{exam.testPaperName}</h3>
+                      <div className="menu-container">
+                        <TiThMenu
+                          className="menu-icon"
+                          onClick={() => toggleMenu(exam._id || exam.id)}
+                        />
+                        {openMenuId === (exam._id ||exam.id) && (
+                          <div className="dropdown-menu">
+                            <button onClick={() => handleDeleteExam(exam._id || exam.id)} className="delete-btn">
+                              Delete Exam
+                            </button>
+                            <button onClick={() => setOpenMenuId(null)} className="close-btn">
+                              Close
+                            </button>
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <p className="subject">Subject : {exam.subject}</p>
                     <p className="numQuestions">
