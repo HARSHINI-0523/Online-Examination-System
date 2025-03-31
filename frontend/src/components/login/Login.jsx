@@ -99,7 +99,6 @@ function Login() {
 
         // Fetch the updated login status from localStorage or directly check if login was successful
         const updatedLoginStatus = JSON.parse(localStorage.getItem("userLoginStatus"));
-        console.log("pringintg: ",updatedLoginStatus);
         if (updatedLoginStatus) { 
         localStorage.setItem("isNewUser", "false"); 
         navigate("/dashboard/profile");
