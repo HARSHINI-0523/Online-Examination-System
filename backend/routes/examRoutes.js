@@ -6,7 +6,6 @@ const Submission = require("../models/Submission");
 const router = express.Router();
 const mongoose = require("mongoose");
 const Classroom=require("../models/Classroom");
-const DetailedAnalysis = require("../models/DetailedAnalysis");  // Adjust path if needed
 
 
 // Create a new exam
@@ -175,7 +174,9 @@ router.get("/tests-performance", authMiddleware, async (req, res) => {
       const performanceData = submissions.map(submission => ({
           examId: submission.examId,
           score: submission.score,
+          totalMarks:submission.totalMarks,
       }));
+      console.log("Performance Data: ",performanceData);
 
       res.status(200).json(performanceData);
   } catch (error) {
