@@ -3,7 +3,6 @@ import { useContext, useState, useEffect } from "react";
 import { userLoginContext } from "../../contexts/userLoginContext";
 import API from "../../api/axios";
 import jsPDF from "jspdf";
-import { TiThMenu } from "react-icons/ti";
 import CreateExam from "../createExam/CreateExam";
 
 function Exams() {
@@ -17,41 +16,64 @@ function Exams() {
 
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isGroupModalOpen, setIsGroupModalOpen] = useState(false);
   const [studentExams, setStudentExams] = useState([]);
-  
 
+  const isTeacher = currentUser?.role === "teacher";
   const isStudent = currentUser?.role === "student";
-
-  const toggleMenu = (examId) => {
-    setOpenMenuId(openMenuId === examId ? null : examId);
-  };
-
+  const [examId, setExamId] = useState(null);
+ 
   //get all groups user is part of
   const handleOpenGroupModal = async () => {
-    if (!currentUser || !currentUser.id) {
+    if (!currentUser || !currentUser._id) {
       console.error("User is not logged in or user ID is missing.");
       return;
     }
 
-    setIsModalOpen(true);
+    setIsGroupModalOpen(true);
     try {
-      const response = await API.get("/groups/user-part-of",{withCredentials:true});
-      setGroups(response.data);
+      const response = await API.get("/classrooms/", { withCredentials: true });
+      console.log("Groups fetched:", response.data);
+      if (Array.isArray(response.data.classrooms)) {
+        setGroups(response.data.classrooms);
+      } else {
+        console.error("Expected an array but got:", response.data);
+        setGroups([]); // Fallback to empty array
+      }
     } catch (error) {
       console.error("Error fetching groups:", error);
+      setGroups([]); // Fallback to empty array in case of an error
     }
   };
 
-  //get all exams posted in group
-  
+  //get all exams posted in group for students
+  useEffect(() => {
+    const fetchStudentExams = async () => {
+      if(currentUser.role!=='student')
+        return;
+      console.log("Fetching student exams...")
+      try {
+        const res = await API.get("/exams/student-get-exams", {
+          withCredentials: true,
+        });
+        console.log("Exams available for student:", res.data);
+        setStudentExams(res.data);
+      } catch (error) {
+        console.error("Error fetching student exams:", error);
+      }
+    };
 
+    if (isStudent) {
+      fetchStudentExams();
+    }
+  }, [isStudent]);
 
-
-  
   // Fetch created exams from backend
   useEffect(() => {
+    
     const fetchExams = async () => {
+      if(currentUser.role!=='teacher')
+        return;
       try {
         const res = await API.get("/exams/teacher-get-exams", {
           withCredentials: true,
@@ -104,8 +126,8 @@ function Exams() {
   };
 
   const handleGroupSelect = (group) => {
+    console.log(group);
     setSelectedGroup(group);
-    setIsModalOpen(false);
   };
 
   const handlePostToGroup = async () => {
@@ -113,18 +135,24 @@ function Exams() {
       alert("Please select a group first!");
       return;
     }
+    
 
     const postData = {
-      content: "Your post content here...",
-      groupId: selectedGroup._id,
-      userId: currentUser?.id,
+      examId, // Pass the exam ID
+      groupId: selectedGroup._id, // Associate exam with the selected group
+      postedBy: currentUser._id, // The teacher posting the exam
     };
+    console.log(postData);
 
     try {
-      const res = await API.post("/posts/group", { withCredentials: true });
-      console.log("Post submitted: ", res.data);
+      const res = await API.post("/exams/post-to-group", postData, {
+        withCredentials: true,
+      });
+      console.log("Exam posted to group:", res.data);
+      alert("Exam successfully posted to the group!");
     } catch (error) {
-      console.error(error);
+      console.error("Error posting exam to group:", error);
+      alert("Failed to post exam to group.");
     }
   };
 
@@ -143,25 +171,28 @@ function Exams() {
         <CreateExam onExamCreated={handleExamCreated} />
       ) : (
         <>
-          <div className="exam-intro">
-            <p>Click the button to conduct a new exam</p>
-            <button
-              className="create-exam-btn"
-              onClick={() => setShowCreateExam(true)}
-            >
-              Create Exam
-            </button>
-          </div>
-
+          {isTeacher && (
+            <div className="exam-intro">
+              <p>Click the button to conduct a new exam</p>
+              <button
+                className="create-exam-btn"
+                onClick={() => setShowCreateExam(true)}
+              >
+                Create Exam
+              </button>
+            </div>
+          )}
+          
           <div className="created-exams">
             {/* <h2>Your Created Exams</h2> */}
             <hr />
+            {isTeacher && (
             <div className="created-exam">
               {exams.length === 0 ? (
                 <p>No exams created yet.</p>
               ) : (
                 exams.map((exam) => (
-                  <div key={exam.id} className="exam-card">
+                  <div key={exam._id} className="exam-card">
                     <img
                       src="https://cdn3.iconfinder.com/data/icons/immigration-process/273/migrate-migration-004-1024.png"
                       alt="Exam image"
@@ -170,19 +201,6 @@ function Exams() {
                     <hr />
                     <div className="exam-header">
                       <h3>{exam.testPaperName}</h3>
-                      <div className="menu-container">
-                        <TiThMenu
-                          className="menu-icon"
-                          onClick={() => toggleMenu(exam.id)}
-                        />
-                        {openMenuId === exam.id && (
-                          <div className="dropdown-menu">
-                            <button onClick={handleOpenGroupModal}>
-                              Post in Group
-                            </button>
-                          </div>
-                        )}
-                      </div>
                     </div>
                     <p className="subject">Subject : {exam.subject}</p>
                     <p className="numQuestions">
@@ -193,11 +211,14 @@ function Exams() {
                     </p>
 
                     {exam.examType === "online-test" ? (
-                      <button
-                        onClick={() => openInstructionsModal(exam.examLink)}
-                      >
-                        Take Exam
-                      </button>
+                        <button
+                          onClick={() => {
+                            setExamId(exam._id);
+                            handleOpenGroupModal();
+                          }}
+                        >
+                          Post Exam
+                        </button>
                     ) : (
                       <button
                         className="pdf-btn"
@@ -209,16 +230,19 @@ function Exams() {
                       </button>
                     )}
                   </div>
+                  
                 ))
               )}
             </div>
+            )}
+          
             {isStudent && (
               <div className="created-exam">
                 {studentExams.length === 0 ? (
                   <p>No exams created yet.</p>
                 ) : (
                   studentExams.map((exam) => (
-                    <div key={exam.id} className="exam-card">
+                    <div key={exam._id} className="exam-card">
                       <img
                         src="https://cdn3.iconfinder.com/data/icons/immigration-process/273/migrate-migration-004-1024.png"
                         alt="Exam image"
@@ -318,6 +342,25 @@ function Exams() {
               Proceed to Exam
             </button>
             <button onClick={() => setShowInstructions(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for selecting group */}
+      {isGroupModalOpen && (
+        <div className="group-modal-overlay">
+          <div className="group-modal-content">
+            <h2>Select a Group</h2>
+            <ul>
+              {groups.map((group) => (
+                <li key={group._id} onClick={() => handleGroupSelect(group)}>
+                  {group.classroomName}
+                </li>
+              ))}
+            </ul>
+            <button onClick={() => handlePostToGroup()}>Post Exam</button>
+
+            <button onClick={() => setIsGroupModalOpen(false)}>Cancel</button>
           </div>
         </div>
       )}

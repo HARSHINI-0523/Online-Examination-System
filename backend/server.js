@@ -18,7 +18,6 @@ const userRoutes = require("./routes/userRoutes");
 const examRoutes=require ("./routes/examRoutes");
 const teacherRoutes=require("./routes/teacherRoutes");
 const classroomRoutes=require("./routes/classroomRoutes");
-const profileRoutes = require("./routes/profileRoutes");
 
 //Middlewares
 app.use(cors({
@@ -33,7 +32,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/teacher", teacherRoutes);
 app.use("/api/classrooms", classroomRoutes);
-app.use("/api/profile", profileRoutes); // Use classroom routes
+
 //Connect to MongoDB
 mongoose
   .connect(process.env.MONGO_URI)

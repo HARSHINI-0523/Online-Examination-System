@@ -22,7 +22,7 @@ function ClassRooms() {
     const getClassrooms = async () => {
       try {
         const response = await API.get("/classrooms", { withCredentials: true });
-        console.log(response.data);
+        
         setClassrooms(response.data.classrooms);
       } catch (error) {
         console.error("Error fetching classrooms:", error);
