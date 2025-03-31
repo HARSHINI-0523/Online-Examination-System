@@ -1,3 +1,4 @@
+// Import necessary modules
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -5,47 +6,41 @@ const path = require("path");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 
-dotenv.config();
-
 const events = require("events");
 events.EventEmitter.defaultMaxListeners = 20;
 
+dotenv.config();
+
 const app = express();
 
-// ✅ Add this route at the top to confirm the server is working
+// ✅ Health check route to verify backend is running
 app.get("/", (req, res) => {
   res.send("Server is Live! Backend is working.");
 });
 
-// ✅ Fix CORS settings to allow your frontend to connect
+// ✅ Apply CORS settings before defining routes
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin:"https://online-examination-system-zeta.vercel.app/dashboard/profile",
   credentials: true,
 }));
 
 app.use(express.json());
 app.use(cookieParser());
 
-// Import Routes
+// ✅ Import Routes
 const userRoutes = require("./routes/userRoutes");
 const examRoutes = require("./routes/examRoutes");
 const teacherRoutes = require("./routes/teacherRoutes");
 const classroomRoutes = require("./routes/classroomRoutes");
 
-// Use Routes
+// ✅ Define API Routes
 app.use("/api/user", userRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/teacher", teacherRoutes);
 app.use("/api/classrooms", classroomRoutes);
 
-// ✅ Serve Frontend in Production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// ✅ Serve Frontend in Production (Place this **after** defining API routes)
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
 
 // ✅ Connect to MongoDB and Start Server
 mongoose.connect(process.env.MONGO_URI)

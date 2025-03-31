@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-    baseURL: import.meta.env.MODE==="development" ? "http://localhost:5000/api": "/api",
+    baseURL: "https://online-examination-system-8-backend.onrender.com/api",
     withCredentials:true, 
 });
 
