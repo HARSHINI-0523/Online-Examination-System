@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 // ✅ Fix CORS settings to allow your frontend to connect
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin:"https://online-examination-system-zeta.vercel.app/",
   credentials: true,
 }));
 
