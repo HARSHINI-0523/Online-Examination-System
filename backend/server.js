@@ -22,8 +22,8 @@ app.get("/", (req, res) => {
 app.use(cors({
   origin: "https://online-examination-system-zeta.vercel.app",
   credentials: true,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  allowedHeaders: "Content-Type,Authorization",
+ /* methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  allowedHeaders: "Content-Type,Authorization",*/
 }));
 
 
