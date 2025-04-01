@@ -25,8 +25,8 @@ router.post("/signup", async (req, res) => {
 
     res.cookie("examToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      secure: true, // ✅ Ensures cookies are sent only over HTTPS
+      sameSite: "None", // ✅ Required for cross-origin cookies
       maxAge: 24 * 60 * 60 * 1000,
     });
 
@@ -51,8 +51,8 @@ router.post("/login", async (req, res) => {
 
     res.cookie("examToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      secure: true, // ✅ Ensures cookies are sent only over HTTPS
+      sameSite: "None", // ✅ Required for cross-origin cookies
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
     console.log("Login Cookie: ", token);
