@@ -18,6 +18,9 @@ app.get("/", (req, res) => {
   res.send("Server is Live! Backend is working.");
 });
 
+app.use(express.json());
+app.use(cookieParser());
+
 // ✅ Apply CORS settings before defining routes
 app.use(cors({
   origin: "https://online-examination-system-zeta.vercel.app",
@@ -26,9 +29,6 @@ app.use(cors({
   allowedHeaders: "Content-Type,Authorization",*/
 }));
 
-
-app.use(express.json());
-app.use(cookieParser());
 
 // ✅ Import Routes
 const userRoutes = require("./routes/userRoutes");
