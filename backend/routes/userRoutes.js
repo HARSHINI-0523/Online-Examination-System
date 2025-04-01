@@ -55,13 +55,18 @@ router.post("/login", async (req, res) => {
     // **Generate JWT Token**
     const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "7d" });
 
-    res.cookie("examToken", token, {
+    /*res.cookie("examToken", token, {
       httpOnly: true,
       secure: false,
       sameSite: "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
+    });*/
+res.cookie("examToken", token, {
+  httpOnly: true,
+  secure: true, // Ensure it's set for HTTPS
+  sameSite: "None", // REQUIRED for cross-site cookies
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
     res.status(200).json({ message: "Login successful", user, token });
   } catch (error) {
     console.error("Login error:", error);
