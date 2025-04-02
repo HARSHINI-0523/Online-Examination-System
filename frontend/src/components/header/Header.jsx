@@ -44,9 +44,9 @@ function Header() {
           )}
         </div>
 
-        <div className="header-option">
+{/*         <div className="header-option">
           <button className="btn btn-primary">Take Demo Test</button>
-        </div>
+        </div> */}
       </div>
       )}
     </div>
