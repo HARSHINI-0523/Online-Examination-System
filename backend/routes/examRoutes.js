@@ -19,7 +19,7 @@ router.post("/create", authMiddleware, async (req, res) => {
 
     let examLink = "";
     if (examType === "online-test") {
-      examLink = `http://localhost:5173/dashboard/exam/${uuidv4()}`;
+      examLink = `https://online-examination-system-zeta.vercel.app/dashboard/exam/${uuidv4()}`;
     }
 
     const newExam = new Exam({
@@ -63,7 +63,7 @@ router.get("/teacher-get-exams", authMiddleware, async (req, res) => {
 router.get("/get-exam/:examId", async (req, res) => {
   try {
     console.log("ExamId: ",req.params.examId);
-    const exam = await Exam.findOne({ examLink: `http://localhost:5173/dashboard/exam/${req.params.examId }`});
+    const exam = await Exam.findOne({ examLink: `https://online-examination-system-zeta.vercel.app/dashboard/exam/${req.params.examId }`});
     console.log("Exam: ",exam);
     if (!exam) return res.status(404).json({ message: "Exam not found" });
     res.json(exam);
