@@ -42,7 +42,7 @@ function Dashboard() {
       {!isExamPage &&(
       <div className="dashboard-sidebar">
         <Link to="/dashboard/exams">Exams</Link> 
-        <Link to="/">Notifications</Link>
+{/*         <Link to="/">Notifications</Link> */}
         <Link to="/dashboard/detailed-analysis">Detailed Analysis</Link>
         <Link to="/dashboard/updateProfile">Update Profile</Link>
         {currentUser?.role === "admin" && (
