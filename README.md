@@ -1,9 +1,9 @@
-# 🧪 Online Examination System
+# Online Examination System
 
 🌐 **Live Website**: [https://online-examination-system-zeta.vercel.app/](https://online-examination-system-zeta.vercel.app/)
 
 
-A scalable and secure **web-based platform** for conducting online exams with integrated features like **user authentication**, **exam creation**, **AI-based proctoring**, and **instant result generation**. Designed to streamline the academic assessment process for **teachers** and **students** in a seamless, digital environment.
+A scalable and secure **web-based platform** for conducting online exams with integrated features like **user authentication**, **exam creation**, **live proctoring**, and **instant result generation**. Designed to streamline the academic assessment process for **teachers** and **students** in a seamless, digital environment.
 
 ---
 
@@ -12,7 +12,7 @@ A scalable and secure **web-based platform** for conducting online exams with in
 - 👩‍🏫 **Teachers** can create, schedule, and manage exams  
 - 📄 **Auto-conversion** of questions into downloadable PDF format  
 - 👨‍🎓 **Students** can attend time-bound exams with secure validation  
-- 🧠 **AI-integrated proctoring** for cheat prevention (webcam + fullscreen)  
+- 🧠 **live proctoring** for cheat prevention (webcam + fullscreen)  
 - 📊 Instant **result and performance analytics**  
 - 🗂 **Group-wise exam posting** and advanced user management  
 
@@ -35,7 +35,7 @@ A scalable and secure **web-based platform** for conducting online exams with in
 
 ### 🔧 Clone the Repository
 ```bash
-git clone https://github.com/AnjusriKandi/Online-Examination-System.git
+git clone https://github.com/HARSHINI-0523/Online-Examination-System.git
 cd Online-Examination-System
 ```
 
@@ -66,8 +66,6 @@ npm run dev
 
 ---
 
-## 📈 Future Enhancements
-- ML-based cheat detection & report generation
-- Real-time result dashboard for faculty
-- Mobile responsive UI for student access
-- Speech detection for enhanced proctoring
+## 🤝 Contribution
+Contributions, issues, and feature requests are welcome!
+Feel free to fork the repository and submit a pull request.
